@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { loaded } from 'projects/ngx-loadable/src/public-api';
 
 @Component({
   selector: 'app-root',
-  template: ` <h1>Example App</h1> `,
+  templateUrl: './app.component.html',
 })
-export class AppComponent {}
+export class AppComponent {
+  readonly loadable = loaded('Some value');
+}

@@ -6,5 +6,6 @@ import { LoadingStatePipe } from './loading-state.pipe';
 @NgModule({
   declarations: [IsLoadingPipe, LoadingStatePipe],
   imports: [CommonModule],
+  exports: [IsLoadingPipe, LoadingStatePipe],
 })
 export class LoadableModule {}
