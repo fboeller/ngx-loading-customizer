@@ -1,3 +1,5 @@
+export type LoadingState = 'Loading' | 'Loaded' | 'Error';
+
 export type Loading = { type: 'Loading' };
 
 export type Loaded<T> = { type: 'Loaded'; value: T };
