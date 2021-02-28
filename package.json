@@ -49,6 +49,8 @@
     "@angular/common": "~11.1.0",
     "@angular/compiler": "~11.1.0",
     "@angular/core": "~11.1.0",
+    "@angular/platform-browser": "^11.2.3",
+    "@angular/platform-browser-dynamic": "^11.2.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
