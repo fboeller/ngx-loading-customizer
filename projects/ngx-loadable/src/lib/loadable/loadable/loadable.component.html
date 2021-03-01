@@ -9,8 +9,18 @@
       "
     ></ng-container>
   </ng-container>
-  <ng-content *ngSwitchCase="'Error'" select="[slot=error]"></ng-content>
+  <ng-container *ngSwitchCase="'Error'">
+    <ng-container
+      *ngTemplateOutlet="
+        error ? error : slotError;
+        context: { error: loadable.error }
+      "
+    ></ng-container
+  ></ng-container>
 </ng-container>
 <ng-template #slotLoaded>
   <ng-content select="[slot=loaded]"></ng-content>
+</ng-template>
+<ng-template #slotError>
+  <ng-content select="[slot=error]"></ng-content>
 </ng-template>

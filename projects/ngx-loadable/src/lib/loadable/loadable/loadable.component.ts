@@ -10,4 +10,5 @@ export class LoadableComponent {
   @Input() loadable!: Loadable<unknown>;
 
   @Input() loaded?: TemplateRef<{ value: any }>;
+  @Input() error?: TemplateRef<{ error: any }>;
 }
