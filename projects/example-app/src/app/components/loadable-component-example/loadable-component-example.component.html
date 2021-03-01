@@ -1,0 +1,7 @@
+<button (click)="load(42)">Load</button>
+<ld-loadable [loadable]="loadable$ | async">
+  <p slot="idle">Idle</p>
+  <p slot="loading">Loading</p>
+  <p slot="loaded">Loaded</p>
+  <p slot="error">Error</p>
+</ld-loadable>

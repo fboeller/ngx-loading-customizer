@@ -68,6 +68,7 @@
     "husky": "^4.3.0",
     "jest": "^26.6.3",
     "jest-marbles": "^2.5.1",
+    "ng-mocks": "^11.9.0",
     "ng-packagr": "^11.1.2",
     "ngx-build-plus": "^11.0.0",
     "prettier": "^2.1.2",
