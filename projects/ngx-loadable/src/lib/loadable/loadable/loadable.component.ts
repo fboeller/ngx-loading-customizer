@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, TemplateRef } from '@angular/core';
 import { Loadable } from '../../loadable.type';
 
 @Component({
@@ -9,5 +9,5 @@ import { Loadable } from '../../loadable.type';
 export class LoadableComponent {
   @Input() loadable!: Loadable<unknown>;
 
-  constructor() {}
+  @Input() loaded?: TemplateRef<{ value: any }>;
 }
