@@ -1,10 +1,16 @@
 import {
   Errored,
+  Idle,
   Loadable,
   Loaded,
   Loading,
   LoadingState,
+  loadingStates,
 } from './loadable.type';
+
+export function isIdle<T>(loadable: Loadable<T>): loadable is Idle {
+  return loadable.type === 'Idle';
+}
 
 export function isLoading<T>(loadable: Loadable<T>): loadable is Loading {
   return loadable.type === 'Loading';
@@ -23,7 +29,7 @@ export function isLoadable<T>(object: unknown): object is Loadable<T> {
     typeof object === 'object' &&
     !!object &&
     'type' in object &&
-    ['Loaded', 'Loading', 'Error'].includes((object as { type: string }).type)
+    loadingStates.includes((object as { type: string }).type)
   );
 }
 

@@ -1,4 +1,6 @@
-import { Errored, Loaded, Loading } from './loadable.type';
+import { Errored, Idle, Loaded, Loading } from './loadable.type';
+
+export const idle: Idle = { type: 'Idle' };
 
 export const loading: Loading = { type: 'Loading' };
 
