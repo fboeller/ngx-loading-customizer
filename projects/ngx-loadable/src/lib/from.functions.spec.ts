@@ -1,4 +1,4 @@
-import { fromObservable, fromPromise } from './from.functions';
+import { toLoadable, fromPromise } from './from.functions';
 import { errored, loaded, loading } from './loadable.constructors';
 import { cold } from 'jest-marbles';
 
@@ -18,13 +18,13 @@ describe('the creation from a promise', () => {
 
 describe('the creation from an observable', () => {
   it('returns first a loading state and then the loaded result if the observable does not error', () => {
-    expect(fromObservable(cold('(x|)', { x: 'value' }))).toBeObservable(
+    expect(toLoadable(cold('(x|)', { x: 'value' }))).toBeObservable(
       cold('(ab|)', { a: loading, b: loaded('value') })
     );
   });
 
   it('returns first a loading state and then an error if the observable errors', () => {
-    expect(fromObservable(cold('#', {}, 'error'))).toBeObservable(
+    expect(toLoadable(cold('#', {}, 'error'))).toBeObservable(
       cold('(ab|)', { a: loading, b: errored('error') })
     );
   });

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { fromObservable } from 'projects/ngx-loadable/src/lib/from.functions';
+import { toLoadable } from 'projects/ngx-loadable/src/lib/from.functions';
 import { idle } from 'projects/ngx-loadable/src/lib/loadable.constructors';
 import { Loadable } from 'projects/ngx-loadable/src/lib/loadable.type';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -16,7 +16,7 @@ export class AppComponent {
 
   constructor(private loadService: LoadService) {
     this.load$
-      .pipe(switchMap((id) => this.loadService.load(id).pipe(fromObservable)))
+      .pipe(switchMap((id) => this.loadService.load(id).pipe(toLoadable)))
       .subscribe(this.loadable$);
   }
 

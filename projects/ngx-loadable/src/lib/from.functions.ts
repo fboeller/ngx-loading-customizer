@@ -7,7 +7,7 @@ export function fromPromise<T>(promise: Promise<T>): Promise<Loadable<T>> {
   return promise.then(loaded).catch(errored);
 }
 
-export function fromObservable<T>(
+export function toLoadable<T>(
   observable: Observable<T>
 ): Observable<Loadable<T>> {
   return observable.pipe(
