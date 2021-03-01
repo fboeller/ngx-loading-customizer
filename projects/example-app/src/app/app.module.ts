@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LoadableModule } from 'projects/ngx-loadable/src/public-api';
+import { SwitchCaseExampleComponent } from './components/switch-case-example/switch-case-example.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SwitchCaseExampleComponent],
   imports: [BrowserModule, LoadableModule],
   providers: [],
   bootstrap: [AppComponent],

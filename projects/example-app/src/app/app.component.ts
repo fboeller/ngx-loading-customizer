@@ -10,17 +10,4 @@ import { LoadService } from './load.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent {
-  load$ = new Subject<number>();
-  loadable$ = new BehaviorSubject(idle as Loadable<string>);
-
-  constructor(private loadService: LoadService) {
-    this.load$
-      .pipe(switchMap((id) => this.loadService.load(id).pipe(toLoadable)))
-      .subscribe(this.loadable$);
-  }
-
-  load(id: number): void {
-    this.load$.next(id);
-  }
-}
+export class AppComponent {}
