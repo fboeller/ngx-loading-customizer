@@ -1,29 +1,7 @@
-<ng-container [ngSwitch]="loadable | loadingState">
-  <ng-container *ngSwitchCase="'Idle'">
-    <ng-container
-      *ngTemplateOutlet="templateRef ? templateRef : content"
-    ></ng-container>
-  </ng-container>
-  <ng-container *ngSwitchCase="'Loading'">
-    <ng-container
-      *ngTemplateOutlet="templateRef ? templateRef : content"
-    ></ng-container>
-  </ng-container>
-  <ng-container *ngSwitchCase="'Loaded'">
-    <ng-container
-      *ngTemplateOutlet="
-        templateRef ? templateRef : content;
-        context: { value: loadable.value }
-      "
-    ></ng-container>
-  </ng-container>
-  <ng-container *ngSwitchCase="'Error'">
-    <ng-container
-      *ngTemplateOutlet="
-        templateRef ? templateRef : content;
-        context: { error: loadable.error }
-      "
-    ></ng-container
-  ></ng-container>
-</ng-container>
+<ng-container
+  *ngTemplateOutlet="
+    templateRef ? templateRef : content;
+    context: templateContext
+  "
+></ng-container>
 <ng-template #content></ng-template>

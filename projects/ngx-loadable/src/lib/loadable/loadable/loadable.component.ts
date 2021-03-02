@@ -14,7 +14,12 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
-import { getLoadingState, isLoading } from '../../loadable.functions';
+import {
+  getLoadingState,
+  hasErrored,
+  isLoaded,
+  isLoading,
+} from '../../loadable.functions';
 import { Loadable } from '../../loadable.type';
 import { DEFAULT_LOADING_COMPONENT } from '../loadable.tokens';
 
@@ -49,6 +54,16 @@ export class LoadableComponent implements OnChanges, OnDestroy {
         return this.loaded;
       case 'Error':
         return this.error;
+    }
+  }
+
+  get templateContext(): unknown {
+    if (isLoaded(this.loadable)) {
+      return { value: this.loadable.value };
+    } else if (hasErrored(this.loadable)) {
+      return { error: this.loadable.error };
+    } else {
+      return undefined;
     }
   }
 
