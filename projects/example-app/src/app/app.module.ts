@@ -7,11 +7,13 @@ import { SwitchCaseExampleComponent } from './components/switch-case-example/swi
 import { LoadableComponentExampleComponent } from './components/loadable-component-example/loadable-component-example.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { JsonErrorComponent } from './components/json-error/json-error.component';
+import { SimpleLoadableComponentExampleComponent } from './components/simple-loadable-component-example/simple-loadable-component-example.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SwitchCaseExampleComponent,
+    SimpleLoadableComponentExampleComponent,
     LoadableComponentExampleComponent,
     LoadingSpinnerComponent,
     JsonErrorComponent,
