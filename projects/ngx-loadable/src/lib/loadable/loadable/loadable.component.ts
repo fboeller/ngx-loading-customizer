@@ -27,6 +27,7 @@ export function setComponentInputs(
   defaultComponentRef: ComponentRef<any>,
   loadable: Loadable<unknown>
 ): void {
+  defaultComponentRef.instance.type = loadable.type;
   if (isLoaded(loadable)) {
     defaultComponentRef.instance.value = loadable.value;
   } else if (hasErrored(loadable)) {
@@ -50,10 +51,20 @@ export class LoadableComponent implements OnChanges, OnDestroy {
   @ViewChild('content', { read: ViewContainerRef })
   content!: ViewContainerRef;
 
+  @ViewChild('loadedRef')
+  loadedRef!: any;
+
   defaultComponentRef?: ComponentRef<unknown>;
 
   readonly onChanges$ = new Subject<SimpleChanges>();
   readonly onDestroy$ = new Subject<SimpleChanges>();
+
+  get hideLoadedNgContent(): boolean {
+    return (
+      this.loadedRef?.nativeElement?.children?.length === 0 ||
+      !isLoaded(this.loadable)
+    );
+  }
 
   get templateRef(): TemplateRef<unknown> | undefined {
     switch (getLoadingState(this.loadable)) {
@@ -68,13 +79,20 @@ export class LoadableComponent implements OnChanges, OnDestroy {
     }
   }
 
-  get templateContext(): unknown {
+  get templateContext(): object {
+    return {
+      ...this.specificTemplateContext,
+      type: this.loadable.type,
+    };
+  }
+
+  get specificTemplateContext(): object {
     if (isLoaded(this.loadable)) {
       return { value: this.loadable.value };
     } else if (hasErrored(this.loadable)) {
       return { error: this.loadable.error };
     } else {
-      return undefined;
+      return {};
     }
   }
 

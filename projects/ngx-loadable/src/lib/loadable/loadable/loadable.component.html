@@ -1,7 +1,12 @@
-<ng-container
-  *ngTemplateOutlet="
-    templateRef ? templateRef : content;
-    context: templateContext
-  "
+<div #loadedRef [hidden]="hideLoadedNgContent">
+  <ng-content></ng-content>
+</div>
+<ng-container *ngIf="hideLoadedNgContent">
+  <ng-container
+    *ngTemplateOutlet="
+      templateRef ? templateRef : content;
+      context: templateContext
+    "
+  ></ng-container
 ></ng-container>
 <ng-template #content></ng-template>
