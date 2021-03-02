@@ -3,16 +3,8 @@ import { CommonModule } from '@angular/common';
 import { IsLoadingPipe } from './is-loading.pipe';
 import { LoadingStatePipe } from './loading-state.pipe';
 import { LoadableComponent } from './loadable/loadable.component';
-import { DefaultComponentOptions, ModuleOptions } from './module.options';
-import { DEFAULT_LOADING_COMPONENT } from './loadable.tokens';
-
-function defaultComponentProviders(
-  options: DefaultComponentOptions
-): Provider[] {
-  return !!options.loading
-    ? [{ provide: DEFAULT_LOADING_COMPONENT, useValue: options.loading }]
-    : [];
-}
+import { DefaultComponents, ModuleOptions } from './module.options';
+import { DEFAULT_COMPONENTS } from './loadable.tokens';
 
 @NgModule({
   declarations: [IsLoadingPipe, LoadingStatePipe, LoadableComponent],
@@ -25,7 +17,12 @@ export class LoadableModule {
   ): ModuleWithProviders<LoadableModule> {
     return {
       ngModule: LoadableModule,
-      providers: defaultComponentProviders(options.defaultComponents ?? {}),
+      providers: [
+        {
+          provide: DEFAULT_COMPONENTS,
+          useValue: options.defaultComponents ?? {},
+        },
+      ],
     };
   }
 }

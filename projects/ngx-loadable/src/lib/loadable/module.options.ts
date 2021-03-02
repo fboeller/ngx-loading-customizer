@@ -1,9 +1,9 @@
 import { Type } from '@angular/core';
 
-export interface DefaultComponentOptions {
+export interface DefaultComponents {
   loading?: Type<unknown>;
 }
 
 export interface ModuleOptions {
-  defaultComponents?: DefaultComponentOptions;
+  defaultComponents?: DefaultComponents;
 }

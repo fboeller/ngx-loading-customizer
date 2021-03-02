@@ -21,7 +21,8 @@ import {
   isLoading,
 } from '../../loadable.functions';
 import { Loadable } from '../../loadable.type';
-import { DEFAULT_LOADING_COMPONENT } from '../loadable.tokens';
+import { DEFAULT_COMPONENTS } from '../loadable.tokens';
+import { DefaultComponents } from '../module.options';
 
 @Component({
   selector: 'ld-loadable',
@@ -69,7 +70,7 @@ export class LoadableComponent implements OnChanges, OnDestroy {
 
   constructor(
     resolver: ComponentFactoryResolver,
-    @Inject(DEFAULT_LOADING_COMPONENT) defaultLoadingComponent: Type<unknown>
+    @Inject(DEFAULT_COMPONENTS) defaultComponents: DefaultComponents
   ) {
     this.onChanges$
       .pipe(
@@ -78,16 +79,18 @@ export class LoadableComponent implements OnChanges, OnDestroy {
         takeUntil(this.onDestroy$)
       )
       .subscribe((loadable) => {
-        if (isLoading(loadable)) {
-          this.content.clear();
-          const factory = resolver.resolveComponentFactory(
-            defaultLoadingComponent
-          );
-          this.defaultLoadingComponentRef = this.content.createComponent(
-            factory
-          );
-        } else {
-          this.defaultLoadingComponentRef?.destroy();
+        if (defaultComponents.loading) {
+          if (isLoading(loadable)) {
+            this.content.clear();
+            const factory = resolver.resolveComponentFactory(
+              defaultComponents.loading
+            );
+            this.defaultLoadingComponentRef = this.content.createComponent(
+              factory
+            );
+          } else {
+            this.defaultLoadingComponentRef?.destroy();
+          }
         }
       });
   }

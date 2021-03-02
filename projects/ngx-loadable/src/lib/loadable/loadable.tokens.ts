@@ -1,5 +1,6 @@
-import { InjectionToken, Type } from '@angular/core';
+import { InjectionToken } from '@angular/core';
+import { DefaultComponents } from './module.options';
 
-export const DEFAULT_LOADING_COMPONENT = new InjectionToken<Type<unknown>>(
-  'DEFAULT_LOADING_COMPONENT'
+export const DEFAULT_COMPONENTS = new InjectionToken<DefaultComponents>(
+  'DEFAULT_COMPONENTS'
 );
