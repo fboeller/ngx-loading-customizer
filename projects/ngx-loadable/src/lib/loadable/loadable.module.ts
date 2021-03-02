@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IsLoadingPipe } from './is-loading.pipe';
 import { LoadingStatePipe } from './loading-state.pipe';
 import { LoadableComponent } from './loadable/loadable.component';
-import { DefaultComponents, ModuleOptions } from './module.options';
+import { ModuleOptions } from './module.options';
 import { DEFAULT_COMPONENTS } from './loadable.tokens';
 
 @NgModule({
