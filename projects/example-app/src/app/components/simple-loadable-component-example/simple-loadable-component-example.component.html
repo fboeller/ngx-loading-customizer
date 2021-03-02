@@ -2,5 +2,6 @@
 <button (click)="load(42, false)">Load</button>
 <button (click)="load(42, true)">Load with error</button>
 <ld-loadable *ngIf="loadable$ | async as loadable" [loadable]="loadable">
-  <p>Custom loaded template {{ loadable.value }}</p>
+  <h3>Loaded</h3>
+  <pre>{{ loadable.value | json }}</pre>
 </ld-loadable>

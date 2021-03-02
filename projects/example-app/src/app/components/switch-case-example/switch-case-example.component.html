@@ -1,11 +1,17 @@
 <h2>Switch case example</h2>
 <button (click)="load(42, false)">Load</button>
 <button (click)="load(42, true)">Load with error</button>
-<ng-container *ngIf="loadable$ | async as loadable">
-  <ng-container [ngSwitch]="loadable | loadingState">
-    <p *ngSwitchCase="'idle'">Idle</p>
-    <p *ngSwitchCase="'loading'">Loading</p>
-    <p *ngSwitchCase="'loaded'">Loaded "{{ loadable.value }}"</p>
-    <p *ngSwitchCase="'error'">Error "{{ loadable.error }}"</p>
-  </ng-container>
+<ng-container
+  *ngIf="loadable$ | async as loadable"
+  [ngSwitch]="loadable | loadingState"
+>
+  <app-loading-spinner *ngSwitchCase="'loading'"></app-loading-spinner>
+  <div *ngSwitchCase="'loaded'">
+    <h3>Loaded</h3>
+    <pre>{{ loadable.value | json }}</pre>
+  </div>
+  <app-json-error
+    *ngSwitchCase="'error'"
+    [error]="loadable.error"
+  ></app-json-error>
 </ng-container>

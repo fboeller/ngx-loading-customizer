@@ -6,8 +6,17 @@ import { delay, mergeMap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class LoadService {
-  load(id: number, error: boolean): Observable<string> {
-    const result = error ? throwError(`error ${id}`) : of(`value ${id}`);
+  load(id: number, error: boolean): Observable<object> {
+    const result = error
+      ? throwError({
+          status: 404,
+          data: { message: `An entity with the id ${id} does not exist.` },
+        })
+      : of({
+          id,
+          name:
+            'Answer to the Ultimate Question of Life, the Universe, and Everything',
+        });
     return of({}).pipe(
       delay(1000),
       mergeMap(() => result)

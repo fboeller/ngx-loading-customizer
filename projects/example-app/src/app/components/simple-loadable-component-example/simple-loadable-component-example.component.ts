@@ -13,7 +13,7 @@ import { LoadService } from '../../load.service';
 })
 export class SimpleLoadableComponentExampleComponent {
   load$ = new Subject<{ id: number; error: boolean }>();
-  loadable$ = new BehaviorSubject(idle as Loadable<string>);
+  loadable$ = new BehaviorSubject(idle as Loadable<object>);
 
   constructor(private loadService: LoadService) {
     this.load$
