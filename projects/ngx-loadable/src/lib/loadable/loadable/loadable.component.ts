@@ -32,8 +32,8 @@ export class LoadableComponent implements OnChanges, OnDestroy {
   @Input() loaded?: TemplateRef<{ value: any }>;
   @Input() error?: TemplateRef<{ error: any }>;
 
-  @ViewChild('slotLoading', { read: ViewContainerRef })
-  slotLoading!: ViewContainerRef;
+  @ViewChild('content', { read: ViewContainerRef })
+  content!: ViewContainerRef;
 
   defaultLoadingComponentRef?: ComponentRef<unknown>;
 
@@ -52,11 +52,11 @@ export class LoadableComponent implements OnChanges, OnDestroy {
       )
       .subscribe((loadable) => {
         if (isLoading(loadable)) {
-          this.slotLoading.clear();
+          this.content.clear();
           const factory = resolver.resolveComponentFactory(
             defaultLoadingComponent
           );
-          this.defaultLoadingComponentRef = this.slotLoading.createComponent(
+          this.defaultLoadingComponentRef = this.content.createComponent(
             factory
           );
         } else {
