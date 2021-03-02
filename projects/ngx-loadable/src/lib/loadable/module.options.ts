@@ -1,8 +1,10 @@
 import { Type } from '@angular/core';
-import { LoadingState } from '../loadable.type';
 
 export type DefaultComponents = {
-  [K in LoadingState]?: Type<unknown>;
+  idle?: Type<{}>;
+  loading?: Type<{}>;
+  loaded?: Type<{ value: any }>;
+  error?: Type<{ error: any }>;
 };
 
 export interface ModuleOptions {

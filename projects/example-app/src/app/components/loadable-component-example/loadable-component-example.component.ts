@@ -12,16 +12,20 @@ import { LoadService } from '../../load.service';
   styleUrls: ['./loadable-component-example.component.css'],
 })
 export class LoadableComponentExampleComponent {
-  load$ = new Subject<number>();
+  load$ = new Subject<{ id: number; error: boolean }>();
   loadable$ = new BehaviorSubject(idle as Loadable<string>);
 
   constructor(private loadService: LoadService) {
     this.load$
-      .pipe(switchMap((id) => this.loadService.load(id).pipe(toLoadable)))
+      .pipe(
+        switchMap(({ id, error }) =>
+          this.loadService.load(id, error).pipe(toLoadable)
+        )
+      )
       .subscribe(this.loadable$);
   }
 
-  load(id: number): void {
-    this.load$.next(id);
+  load(id: number, error: boolean): void {
+    this.load$.next({ id, error });
   }
 }

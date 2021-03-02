@@ -18,11 +18,21 @@ import {
   getLoadingState,
   hasErrored,
   isLoaded,
-  isLoading,
 } from '../../loadable.functions';
 import { Loadable } from '../../loadable.type';
 import { DEFAULT_COMPONENTS } from '../loadable.tokens';
 import { DefaultComponents } from '../module.options';
+
+export function setComponentInputs(
+  defaultComponentRef: ComponentRef<any>,
+  loadable: Loadable<unknown>
+): void {
+  if (isLoaded(loadable)) {
+    defaultComponentRef.instance.value = loadable.value;
+  } else if (hasErrored(loadable)) {
+    defaultComponentRef.instance.error = loadable.error;
+  }
+}
 
 @Component({
   selector: 'ld-loadable',
@@ -40,7 +50,7 @@ export class LoadableComponent implements OnChanges, OnDestroy {
   @ViewChild('content', { read: ViewContainerRef })
   content!: ViewContainerRef;
 
-  defaultLoadingComponentRef?: ComponentRef<unknown>;
+  defaultComponentRef?: ComponentRef<unknown>;
 
   readonly onChanges$ = new Subject<SimpleChanges>();
   readonly onDestroy$ = new Subject<SimpleChanges>();
@@ -75,22 +85,19 @@ export class LoadableComponent implements OnChanges, OnDestroy {
     this.onChanges$
       .pipe(
         filter((changes) => 'loadable' in changes),
-        map((changes) => changes.loadable.currentValue),
+        map((changes) => changes.loadable),
         takeUntil(this.onDestroy$)
       )
-      .subscribe((loadable) => {
-        if (defaultComponents.loading) {
-          if (isLoading(loadable)) {
-            this.content.clear();
-            const factory = resolver.resolveComponentFactory(
-              defaultComponents.loading
-            );
-            this.defaultLoadingComponentRef = this.content.createComponent(
-              factory
-            );
-          } else {
-            this.defaultLoadingComponentRef?.destroy();
-          }
+      .subscribe((change) => {
+        this.defaultComponentRef?.destroy();
+        const currentLoadable: Loadable<unknown> = change.currentValue;
+        const defaultComponent =
+          defaultComponents[getLoadingState(currentLoadable)];
+        if (defaultComponent) {
+          this.content.clear();
+          const factory = resolver.resolveComponentFactory(defaultComponent);
+          this.defaultComponentRef = this.content.createComponent(factory);
+          setComponentInputs(this.defaultComponentRef, currentLoadable);
         }
       });
   }

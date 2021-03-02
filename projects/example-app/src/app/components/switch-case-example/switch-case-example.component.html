@@ -1,4 +1,5 @@
-<button (click)="load(42)">Load</button>
+<button (click)="load(42, false)">Load</button>
+<button (click)="load(42, true)">Load with error</button>
 <ng-container *ngIf="loadable$ | async as loadable">
   <ng-container [ngSwitch]="loadable | loadingState">
     <p *ngSwitchCase="'idle'">Idle</p>
