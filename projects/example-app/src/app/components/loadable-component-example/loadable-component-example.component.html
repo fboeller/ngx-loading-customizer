@@ -1,8 +1,17 @@
 <button (click)="load(42)">Load</button>
-<ld-loadable [loadable]="loadable$ | async" [loaded]="loaded">
-  <p slot="idle">Idle</p>
-  <p slot="error">Error</p>
+<ld-loadable
+  [loadable]="loadable$ | async"
+  [idle]="idle"
+  [loaded]="loaded"
+  [error]="error"
+>
 </ld-loadable>
+<ng-template #idle>
+  <p>Idle</p>
+</ng-template>
 <ng-template let-value="value" #loaded>
   <p>Loaded {{ value }}</p>
+</ng-template>
+<ng-template let-error="error" #error>
+  <p>Error {{ error }}</p>
 </ng-template>
