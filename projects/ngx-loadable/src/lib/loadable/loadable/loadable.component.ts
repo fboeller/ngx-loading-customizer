@@ -104,18 +104,17 @@ export class LoadableComponent implements OnChanges, OnDestroy {
       .pipe(
         filter((changes) => 'loadable' in changes),
         map((changes) => changes.loadable),
+        map((change) => change.currentValue),
         takeUntil(this.onDestroy$)
       )
-      .subscribe((change) => {
+      .subscribe((loadable: Loadable<unknown>) => {
         this.defaultComponentRef?.destroy();
-        const currentLoadable: Loadable<unknown> = change.currentValue;
-        const defaultComponent =
-          defaultComponents[getLoadingState(currentLoadable)];
+        const defaultComponent = defaultComponents[getLoadingState(loadable)];
         if (defaultComponent) {
           this.content.clear();
           const factory = resolver.resolveComponentFactory(defaultComponent);
           this.defaultComponentRef = this.content.createComponent(factory);
-          setComponentInputs(this.defaultComponentRef, currentLoadable);
+          setComponentInputs(this.defaultComponentRef, loadable);
         }
       });
   }
