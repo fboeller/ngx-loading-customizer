@@ -1,22 +1,27 @@
-export type LoadingState = 'Idle' | 'Loading' | 'Loaded' | 'Error';
+export type LoadingState = 'idle' | 'loading' | 'loaded' | 'error';
 
-export const loadingStates = ['Idle', 'Loading', 'Loaded', 'Error'];
+export const loadingStates: LoadingState[] = [
+  'idle',
+  'loading',
+  'loaded',
+  'error',
+];
 
 export interface Idle extends ILoadable {
-  type: 'Idle';
+  type: 'idle';
 }
 
 export interface Loading extends ILoadable {
-  type: 'Loading';
+  type: 'loading';
 }
 
 export interface Loaded<T> extends ILoadable {
-  type: 'Loaded';
+  type: 'loaded';
   value: T;
 }
 
 export interface Errored extends ILoadable {
-  type: 'Error';
+  type: 'error';
   error: any;
 }
 

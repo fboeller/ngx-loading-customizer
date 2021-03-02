@@ -47,13 +47,13 @@ export class LoadableComponent implements OnChanges, OnDestroy {
 
   get templateRef(): TemplateRef<unknown> | undefined {
     switch (getLoadingState(this.loadable)) {
-      case 'Idle':
+      case 'idle':
         return this.idle;
-      case 'Loading':
+      case 'loading':
         return this.loading;
-      case 'Loaded':
+      case 'loaded':
         return this.loaded;
-      case 'Error':
+      case 'error':
         return this.error;
     }
   }

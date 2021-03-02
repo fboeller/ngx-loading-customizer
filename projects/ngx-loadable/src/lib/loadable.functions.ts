@@ -9,19 +9,19 @@ import {
 } from './loadable.type';
 
 export function isIdle<T>(loadable: Loadable<T>): loadable is Idle {
-  return loadable.type === 'Idle';
+  return loadable.type === 'idle';
 }
 
 export function isLoading<T>(loadable: Loadable<T>): loadable is Loading {
-  return loadable.type === 'Loading';
+  return loadable.type === 'loading';
 }
 
 export function hasErrored<T>(loadable: Loadable<T>): loadable is Errored {
-  return loadable.type === 'Error';
+  return loadable.type === 'error';
 }
 
 export function isLoaded<T>(loadable: Loadable<T>): loadable is Loaded<T> {
-  return loadable.type === 'Loaded';
+  return loadable.type === 'loaded';
 }
 
 export function isLoadable<T>(object: unknown): object is Loadable<T> {
@@ -29,7 +29,7 @@ export function isLoadable<T>(object: unknown): object is Loadable<T> {
     typeof object === 'object' &&
     !!object &&
     'type' in object &&
-    loadingStates.includes((object as { type: string }).type)
+    loadingStates.includes((object as { type: LoadingState }).type)
   );
 }
 
@@ -39,6 +39,6 @@ export function getLoadingState<T>(loadable: Loadable<T>): LoadingState {
 
 export function map<T, S>(f: (t: T) => S, loadable: Loadable<T>): Loadable<S> {
   return isLoaded(loadable)
-    ? { type: 'Loaded', value: f(loadable.value) }
+    ? { type: 'loaded', value: f(loadable.value) }
     : loadable;
 }
