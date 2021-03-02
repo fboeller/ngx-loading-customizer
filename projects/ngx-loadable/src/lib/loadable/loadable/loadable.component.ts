@@ -1,6 +1,5 @@
 import {
   Component,
-  ComponentFactory,
   ComponentFactoryResolver,
   ComponentRef,
   Inject,
@@ -13,9 +12,9 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
-import { isLoading } from '../../loadable.functions';
+import { getLoadingState, isLoading } from '../../loadable.functions';
 import { Loadable } from '../../loadable.type';
 import { DEFAULT_LOADING_COMPONENT } from '../loadable.tokens';
 
@@ -39,6 +38,19 @@ export class LoadableComponent implements OnChanges, OnDestroy {
 
   readonly onChanges$ = new Subject<SimpleChanges>();
   readonly onDestroy$ = new Subject<SimpleChanges>();
+
+  get templateRef(): TemplateRef<unknown> | undefined {
+    switch (getLoadingState(this.loadable)) {
+      case 'Idle':
+        return this.idle;
+      case 'Loading':
+        return this.loading;
+      case 'Loaded':
+        return this.loaded;
+      case 'Error':
+        return this.error;
+    }
+  }
 
   constructor(
     resolver: ComponentFactoryResolver,
