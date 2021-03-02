@@ -7,3 +7,4 @@ export * from './lib/loadable/loadable.module';
 export * from './lib/loadable/is-loading.pipe';
 export * from './lib/loadable/loading-state.pipe';
 export * from './lib/loadable/loadable-error.type';
+export * from './lib/loadable/loadable.tokens';

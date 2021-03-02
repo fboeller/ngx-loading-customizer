@@ -1,7 +1,6 @@
 <button (click)="load(42)">Load</button>
 <ld-loadable [loadable]="loadable$ | async" [loaded]="loaded">
   <p slot="idle">Idle</p>
-  <app-loading-spinner slot="loading"></app-loading-spinner>
   <p slot="error">Error</p>
 </ld-loadable>
 <ng-template let-value="value" #loaded>
