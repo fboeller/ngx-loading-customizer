@@ -27,6 +27,7 @@ import { DEFAULT_LOADING_COMPONENT } from '../loadable.tokens';
 export class LoadableComponent implements OnChanges, OnDestroy {
   @Input() loadable!: Loadable<unknown>;
 
+  @Input() idle?: TemplateRef<void>;
   @Input() loading?: TemplateRef<void>;
   @Input() loaded?: TemplateRef<{ value: any }>;
   @Input() error?: TemplateRef<{ error: any }>;

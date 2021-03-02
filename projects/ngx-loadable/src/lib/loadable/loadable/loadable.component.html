@@ -1,5 +1,7 @@
 <ng-container [ngSwitch]="loadable | loadingState">
-  <ng-content *ngSwitchCase="'Idle'" select="[slot=idle]"></ng-content>
+  <ng-container *ngSwitchCase="'Idle'">
+    <ng-container *ngTemplateOutlet="idle ? idle : slotIdle"></ng-container>
+  </ng-container>
   <ng-container *ngSwitchCase="'Loading'">
     <ng-container
       *ngTemplateOutlet="loading ? loading : slotLoading"
@@ -22,6 +24,9 @@
     ></ng-container
   ></ng-container>
 </ng-container>
+<ng-template #slotIdle>
+  <ng-content select="[slot=idle]"></ng-content>
+</ng-template>
 <ng-template #slotLoading>
   <ng-content select="[slot=loading]"></ng-content>
 </ng-template>
