@@ -1,4 +1,4 @@
-import { map } from './loadable.functions';
+import { map } from './map.function';
 
 describe('the map function', () => {
   it('maps the loading state to itself', () => {

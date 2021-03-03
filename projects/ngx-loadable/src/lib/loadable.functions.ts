@@ -36,9 +36,3 @@ export function isLoadable<T>(object: unknown): object is Loadable<T> {
 export function getLoadingState<T>(loadable: Loadable<T>): LoadingState {
   return loadable.type;
 }
-
-export function map<T, S>(f: (t: T) => S, loadable: Loadable<T>): Loadable<S> {
-  return isLoaded(loadable)
-    ? { type: 'loaded', value: f(loadable.value) }
-    : loadable;
-}
