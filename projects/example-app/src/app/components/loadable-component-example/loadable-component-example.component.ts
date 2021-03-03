@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { toLoadable } from 'projects/ngx-loadable/src/lib/from.functions';
+import { toLoadable } from 'projects/ngx-loadable/src/lib/functions/to-loadable.function';
 import { idle } from 'projects/ngx-loadable/src/lib/loadable.constructors';
 import { Loadable } from 'projects/ngx-loadable/src/lib/loadable.type';
 import { BehaviorSubject, Subject } from 'rxjs';
