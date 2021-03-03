@@ -9,7 +9,6 @@ import { LoadService } from '../../load.service';
 @Component({
   selector: 'app-switch-case-example',
   templateUrl: './switch-case-example.component.html',
-  styleUrls: ['./switch-case-example.component.css'],
 })
 export class SwitchCaseExampleComponent {
   load$ = new Subject<{ id: number; error: boolean }>();

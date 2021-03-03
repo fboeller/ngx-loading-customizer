@@ -9,7 +9,6 @@ import { LoadService } from '../../load.service';
 @Component({
   selector: 'app-simple-loadable-component-example',
   templateUrl: './simple-loadable-component-example.component.html',
-  styleUrls: ['./simple-loadable-component-example.component.css'],
 })
 export class SimpleLoadableComponentExampleComponent {
   load$ = new Subject<{ id: number; error: boolean }>();
