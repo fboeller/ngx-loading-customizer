@@ -3,8 +3,8 @@ export * from './lib/loadable.functions';
 export * from './lib/loadable.constructors';
 export * from './lib/from.functions';
 
-export * from './lib/loadable/loadable.module';
-export * from './lib/loadable/is-loading.pipe';
-export * from './lib/loadable/loading-state.pipe';
-export * from './lib/loadable/loadable-error.type';
-export * from './lib/loadable/loadable.tokens';
+export * from './lib/angular/loadable.module';
+export * from './lib/angular/is-loading.pipe';
+export * from './lib/angular/loading-state.pipe';
+export * from './lib/angular/loadable-error.type';
+export * from './lib/angular/loadable.tokens';
