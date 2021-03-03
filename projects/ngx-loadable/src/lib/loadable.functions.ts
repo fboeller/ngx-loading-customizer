@@ -1,3 +1,4 @@
+import { LoadableComponent } from './angular/loadable/loadable.component';
 import {
   Errored,
   Idle,
