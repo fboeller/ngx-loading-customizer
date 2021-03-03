@@ -1,0 +1,7 @@
+<h2>Ngrx example</h2>
+<button (click)="load(42, false)">Load</button>
+<button (click)="load(42, true)">Load with error</button>
+<ld-loadable *ngIf="loadable$ | async as loadable" [loadable]="loadable">
+  <h3>Loaded</h3>
+  <pre>{{ loadable.value | json }}</pre>
+</ld-loadable>

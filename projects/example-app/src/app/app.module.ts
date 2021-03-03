@@ -8,6 +8,11 @@ import { LoadableComponentExampleComponent } from './components/loadable-compone
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { JsonErrorComponent } from './components/json-error/json-error.component';
 import { SimpleLoadableComponentExampleComponent } from './components/simple-loadable-component-example/simple-loadable-component-example.component';
+import { NgrxExampleComponent } from './components/ngrx-example/ngrx-example.component';
+import { StoreModule } from '@ngrx/store';
+import { responseReducer } from './components/ngrx-example/reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { LoadEffects } from './components/ngrx-example/effects';
 
 @NgModule({
   declarations: [
@@ -17,9 +22,14 @@ import { SimpleLoadableComponentExampleComponent } from './components/simple-loa
     LoadableComponentExampleComponent,
     LoadingSpinnerComponent,
     JsonErrorComponent,
+    NgrxExampleComponent,
   ],
   imports: [
     BrowserModule,
+    StoreModule.forRoot({
+      response: responseReducer,
+    }),
+    EffectsModule.forRoot([LoadEffects]),
     LoadableModule.forRoot({
       defaultComponents: {
         loading: LoadingSpinnerComponent,
