@@ -1,12 +1,18 @@
 <form [formGroup]="form">
-  <label for="isError">If the load should result in an error</label>
-  <input type="checkbox" name="isError" formControlName="isError" required />
-  <label for="loadingTime">The loading time in milliseconds</label>
-  <input
-    type="number"
-    name="loadingTime"
-    formControlName="loadingTime"
-    required
-  />
-  <button (click)="load(42)">Load</button>
+  <div class="group">
+    <label for="isError">If the load should result in an error</label>
+    <input type="checkbox" name="isError" formControlName="isError" required />
+  </div>
+  <div class="group">
+    <label for="loadingTime">The loading time in milliseconds</label>
+    <input
+      type="number"
+      name="loadingTime"
+      formControlName="loadingTime"
+      required
+    />
+  </div>
+  <div class="buttons">
+    <button (click)="load(42)">Load</button>
+  </div>
 </form>
