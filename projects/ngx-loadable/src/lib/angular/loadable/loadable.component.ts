@@ -48,12 +48,9 @@ export type TemplateRefs = {
   templateUrl: './loadable.component.html',
   styleUrls: ['./loadable.component.css'],
 })
-export class LoadableComponent implements OnChanges, OnDestroy {
+export class LoadableComponent implements OnChanges {
   @Input() loadable: Loadable<unknown> = idle;
   @Input() templates: TemplateRefs = {};
-
-  private loadable$: Observable<Loadable<unknown>>;
-  private templates$: Observable<TemplateRefs>;
 
   @ViewChild('content', { read: ViewContainerRef })
   content!: ViewContainerRef;
@@ -62,9 +59,6 @@ export class LoadableComponent implements OnChanges, OnDestroy {
   loadedRef!: any;
 
   defaultComponentRef?: ComponentRef<unknown>;
-
-  readonly onChanges$ = new Subject<SimpleChanges>();
-  readonly onDestroy$ = new Subject<void>();
 
   get hideLoadedNgContent(): boolean {
     return (
@@ -97,23 +91,7 @@ export class LoadableComponent implements OnChanges, OnDestroy {
   constructor(
     private resolver: ComponentFactoryResolver,
     @Inject(DEFAULT_COMPONENTS) private defaultComponents: DefaultComponents
-  ) {
-    this.templates$ = this.onChanges$.pipe(
-      filter((changes) => 'templates' in changes),
-      map((changes) => changes.templates),
-      map((change) => change.currentValue)
-    );
-    this.loadable$ = this.onChanges$.pipe(
-      filter((changes) => 'loadable' in changes),
-      map((changes) => changes.loadable),
-      map((change) => change.currentValue)
-    );
-    this.loadable$
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe((loadable: Loadable<unknown>) => {
-        this.updateContent(loadable);
-      });
-  }
+  ) {}
 
   updateContent(loadable: Loadable<unknown>): void {
     this.defaultComponentRef?.destroy();
@@ -127,10 +105,8 @@ export class LoadableComponent implements OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.onChanges$.next(changes);
-  }
-
-  ngOnDestroy(): void {
-    this.onDestroy$.next();
+    if ('loadable' in changes) {
+      this.updateContent(this.loadable);
+    }
   }
 }
