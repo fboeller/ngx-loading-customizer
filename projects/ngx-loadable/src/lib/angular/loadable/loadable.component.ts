@@ -12,7 +12,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 import { idle } from '../../loadable.constructors';
 import {
@@ -51,6 +51,8 @@ export type TemplateRefs = {
 export class LoadableComponent implements OnChanges, OnDestroy {
   @Input() loadable: Loadable<unknown> = idle;
   @Input() templates: TemplateRefs = {};
+
+  private loadable$: Observable<Loadable<unknown>>;
 
   @ViewChild('content', { read: ViewContainerRef })
   content!: ViewContainerRef;
@@ -95,13 +97,13 @@ export class LoadableComponent implements OnChanges, OnDestroy {
     private resolver: ComponentFactoryResolver,
     @Inject(DEFAULT_COMPONENTS) private defaultComponents: DefaultComponents
   ) {
-    this.onChanges$
-      .pipe(
-        filter((changes) => 'loadable' in changes),
-        map((changes) => changes.loadable),
-        map((change) => change.currentValue),
-        takeUntil(this.onDestroy$)
-      )
+    this.loadable$ = this.onChanges$.pipe(
+      filter((changes) => 'loadable' in changes),
+      map((changes) => changes.loadable),
+      map((change) => change.currentValue)
+    );
+    this.loadable$
+      .pipe(takeUntil(this.onDestroy$))
       .subscribe((loadable: Loadable<unknown>) => {
         this.updateContent(loadable);
       });
