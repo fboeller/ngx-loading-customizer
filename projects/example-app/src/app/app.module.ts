@@ -2,10 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { NgrxExampleModule } from './components/ngrx-example/ngrx-example.module';
-import { LoadableComponentExampleModule } from './components/loadable-component-example/loadable-component-example.module';
-import { SimpleLoadableComponentExampleModule } from './components/simple-loadable-component-example/simple-loadable-component-example.module';
-import { SwitchCaseExampleModule } from './components/switch-case-example/switch-case-example.module';
+import { NgrxExampleModule } from './examples/ngrx-example/ngrx-example.module';
+import { LoadableComponentExampleModule } from './examples/loadable-component-example/loadable-component-example.module';
+import { DefaultExampleModule } from './examples/default-example/default-example.module';
+import { SwitchCaseExampleModule } from './examples/switch-case-example/switch-case-example.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,7 +13,7 @@ import { SwitchCaseExampleModule } from './components/switch-case-example/switch
     BrowserModule,
     NgrxExampleModule,
     LoadableComponentExampleModule,
-    SimpleLoadableComponentExampleModule,
+    DefaultExampleModule,
     SwitchCaseExampleModule,
   ],
   bootstrap: [AppComponent],
