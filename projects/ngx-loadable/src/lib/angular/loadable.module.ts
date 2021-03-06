@@ -7,10 +7,12 @@ import { defaultComponents, ModuleOptions } from './module.options';
 import { DEFAULT_COMPONENTS } from './loadable.tokens';
 import { LoadableErrorComponent } from './loadable-error/loadable-error.component';
 import { LoadableLoadingComponent } from './loadable-loading/loadable-loading.component';
+import { LoadedValuePipe } from './loaded-value.pipe';
 
 @NgModule({
   declarations: [
     IsLoadingPipe,
+    LoadedValuePipe,
     LoadingStatePipe,
     LoadableComponent,
     LoadableErrorComponent,
@@ -19,6 +21,7 @@ import { LoadableLoadingComponent } from './loadable-loading/loadable-loading.co
   imports: [CommonModule],
   exports: [
     IsLoadingPipe,
+    LoadedValuePipe,
     LoadingStatePipe,
     LoadableComponent,
     LoadableErrorComponent,
