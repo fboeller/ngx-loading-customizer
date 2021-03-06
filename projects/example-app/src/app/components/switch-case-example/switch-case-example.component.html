@@ -10,8 +10,8 @@
     <h3>Loaded</h3>
     <pre>{{ loadable.value | json }}</pre>
   </div>
-  <app-json-error
+  <ld-loadable-error
     *ngSwitchCase="'error'"
     [error]="loadable.error"
-  ></app-json-error>
+  ></ld-loadable-error>
 </ng-container>

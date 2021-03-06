@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { SwitchCaseExampleComponent } from './components/switch-case-example/switch-case-example.component';
 import { LoadableComponentExampleComponent } from './components/loadable-component-example/loadable-component-example.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
-import { JsonErrorComponent } from './components/json-error/json-error.component';
 import { SimpleLoadableComponentExampleComponent } from './components/simple-loadable-component-example/simple-loadable-component-example.component';
 import { NgrxExampleComponent } from './components/ngrx-example/ngrx-example.component';
 import { StoreModule } from '@ngrx/store';
@@ -21,7 +20,6 @@ import { LoadableModule } from 'projects/ngx-loadable/src/lib/angular/loadable.m
     SimpleLoadableComponentExampleComponent,
     LoadableComponentExampleComponent,
     LoadingSpinnerComponent,
-    JsonErrorComponent,
     NgrxExampleComponent,
   ],
   imports: [
@@ -33,7 +31,6 @@ import { LoadableModule } from 'projects/ngx-loadable/src/lib/angular/loadable.m
     LoadableModule.forRoot({
       defaultComponents: {
         loading: LoadingSpinnerComponent,
-        error: JsonErrorComponent,
       },
     }),
   ],
