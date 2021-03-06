@@ -4,6 +4,7 @@ import { Loadable } from 'projects/ngx-loadable/src/public-api';
 import { Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { LoadService } from '../load.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-load-form',
@@ -15,7 +16,11 @@ export class LoadFormComponent {
 
   load$ = new Subject<{ id: number; error: boolean }>();
 
-  constructor(private loadService: LoadService) {
+  form = this.fb.group({
+    isError: [false],
+  });
+
+  constructor(private loadService: LoadService, private fb: FormBuilder) {
     this.load$
       .pipe(
         switchMap(({ id, error }) =>
@@ -25,7 +30,7 @@ export class LoadFormComponent {
       .subscribe(this.loadable);
   }
 
-  load(id: number, error: boolean): void {
-    this.load$.next({ id, error });
+  load(id: number): void {
+    this.load$.next({ id, error: this.form.value.isError });
   }
 }
