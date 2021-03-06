@@ -7,10 +7,10 @@ import { switchMap } from 'rxjs/operators';
 import { LoadService } from '../../load.service';
 
 @Component({
-  selector: 'app-switch-case-example',
-  templateUrl: './switch-case-example.component.html',
+  selector: 'app-lightweight-example',
+  templateUrl: './lightweight-example.component.html',
 })
-export class SwitchCaseExampleComponent {
+export class LightweightExampleComponent {
   load$ = new Subject<{ id: number; error: boolean }>();
   loadable$ = new BehaviorSubject(idle as Loadable<object>);
 

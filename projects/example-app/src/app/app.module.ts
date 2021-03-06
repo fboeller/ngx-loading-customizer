@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { NgrxExampleModule } from './examples/ngrx-example/ngrx-example.module';
 import { CustomLoadingTemplateExampleModule } from './examples/custom-loading-template-example/custom-loading-template-example.module';
 import { DefaultExampleModule } from './examples/default-example/default-example.module';
-import { SwitchCaseExampleModule } from './examples/switch-case-example/switch-case-example.module';
+import { LightweightExampleModule } from './examples/lightweight-example/lightweight-example.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,7 +14,7 @@ import { SwitchCaseExampleModule } from './examples/switch-case-example/switch-c
     NgrxExampleModule,
     CustomLoadingTemplateExampleModule,
     DefaultExampleModule,
-    SwitchCaseExampleModule,
+    LightweightExampleModule,
   ],
   bootstrap: [AppComponent],
 })

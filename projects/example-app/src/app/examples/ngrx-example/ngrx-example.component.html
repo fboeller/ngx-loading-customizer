@@ -1,4 +1,8 @@
-<h2>Ngrx example</h2>
+<h2>NgRx</h2>
+<p>
+  This example displays how objects of the loadable type can be stored with
+  NgRx.
+</p>
 <button (click)="load(42, false)">Load</button>
 <button (click)="load(42, true)">Load with error</button>
 <ld-loadable *ngIf="loadable$ | async as loadable" [loadable]="loadable">
