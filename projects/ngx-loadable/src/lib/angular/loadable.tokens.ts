@@ -1,6 +1,7 @@
 import { InjectionToken } from '@angular/core';
-import { DefaultComponents } from './module.options';
+import { defaultComponents, DefaultComponents } from './module.options';
 
 export const DEFAULT_COMPONENTS = new InjectionToken<DefaultComponents>(
-  'DEFAULT_COMPONENTS'
+  'DEFAULT_COMPONENTS',
+  { factory: () => defaultComponents }
 );

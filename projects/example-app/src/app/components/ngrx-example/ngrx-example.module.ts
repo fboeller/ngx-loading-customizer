@@ -12,7 +12,7 @@ import { LoadableModule } from 'projects/ngx-loadable/src/lib/angular/loadable.m
   declarations: [NgrxExampleComponent],
   imports: [
     BrowserModule,
-    LoadableModule.forRoot(),
+    LoadableModule,
     StoreModule.forRoot({
       response: responseReducer,
     }),
