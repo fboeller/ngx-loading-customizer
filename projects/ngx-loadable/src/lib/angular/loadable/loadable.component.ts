@@ -93,15 +93,15 @@ export class LoadableComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('loadable' in changes || 'templates' in changes) {
-      this.templateRef = this.templates[getLoadingState(this.loadable)];
-    }
     if ('loadable' in changes) {
       this.hideLoadedNgContent = this.isNgContentHidden(this.loadable);
       this.templateContext = {
         ...loadableTemplateContext(this.loadable),
         type: this.loadable.type,
       };
+    }
+    if ('loadable' in changes || 'templates' in changes) {
+      this.templateRef = this.templates[getLoadingState(this.loadable)];
       this.updateContent(this.loadable);
     }
   }
