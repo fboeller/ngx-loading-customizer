@@ -6,12 +6,8 @@ import { SwitchCaseExampleComponent } from './components/switch-case-example/swi
 import { LoadableComponentExampleComponent } from './components/loadable-component-example/loadable-component-example.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { SimpleLoadableComponentExampleComponent } from './components/simple-loadable-component-example/simple-loadable-component-example.component';
-import { NgrxExampleComponent } from './components/ngrx-example/ngrx-example.component';
-import { StoreModule } from '@ngrx/store';
-import { responseReducer } from './components/ngrx-example/reducer';
-import { EffectsModule } from '@ngrx/effects';
-import { LoadEffects } from './components/ngrx-example/effects';
 import { LoadableModule } from 'projects/ngx-loadable/src/lib/angular/loadable.module';
+import { NgrxExampleModule } from './components/ngrx-example/ngrx-example.module';
 
 @NgModule({
   declarations: [
@@ -20,14 +16,10 @@ import { LoadableModule } from 'projects/ngx-loadable/src/lib/angular/loadable.m
     SimpleLoadableComponentExampleComponent,
     LoadableComponentExampleComponent,
     LoadingSpinnerComponent,
-    NgrxExampleComponent,
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({
-      response: responseReducer,
-    }),
-    EffectsModule.forRoot([LoadEffects]),
+    NgrxExampleModule,
     LoadableModule.forRoot({
       defaultComponents: {
         loading: LoadingSpinnerComponent,
