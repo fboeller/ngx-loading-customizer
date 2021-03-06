@@ -5,15 +5,11 @@ import {
   Inject,
   Input,
   OnChanges,
-  OnDestroy,
   SimpleChanges,
   TemplateRef,
-  Type,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { filter, map, takeUntil } from 'rxjs/operators';
 import { idle } from '../../loadable.constructors';
 import {
   getLoadingState,
@@ -36,6 +32,16 @@ export function setComponentInputs(
   }
 }
 
+function loadableTemplateContext(loadable: Loadable<unknown>): object {
+  if (isLoaded(loadable)) {
+    return { value: loadable.value };
+  } else if (hasErrored(loadable)) {
+    return { error: loadable.error };
+  } else {
+    return {};
+  }
+}
+
 export type TemplateRefs = {
   idle?: TemplateRef<void>;
   loading?: TemplateRef<void>;
@@ -53,40 +59,15 @@ export class LoadableComponent implements OnChanges {
   @Input() templates: TemplateRefs = {};
 
   @ViewChild('content', { read: ViewContainerRef })
-  content!: ViewContainerRef;
+  content?: ViewContainerRef;
 
   @ViewChild('loadedRef')
-  loadedRef!: any;
+  loadedRef?: any;
 
   defaultComponentRef?: ComponentRef<unknown>;
-
-  get hideLoadedNgContent(): boolean {
-    return (
-      this.loadedRef?.nativeElement?.children?.length === 0 ||
-      !isLoaded(this.loadable)
-    );
-  }
-
-  get templateRef(): TemplateRef<unknown> | undefined {
-    return this.templates[getLoadingState(this.loadable)];
-  }
-
-  get templateContext(): object {
-    return {
-      ...this.specificTemplateContext,
-      type: this.loadable.type,
-    };
-  }
-
-  get specificTemplateContext(): object {
-    if (isLoaded(this.loadable)) {
-      return { value: this.loadable.value };
-    } else if (hasErrored(this.loadable)) {
-      return { error: this.loadable.error };
-    } else {
-      return {};
-    }
-  }
+  templateRef?: TemplateRef<unknown>;
+  hideLoadedNgContent = true;
+  templateContext?: object;
 
   constructor(
     private resolver: ComponentFactoryResolver,
@@ -96,7 +77,7 @@ export class LoadableComponent implements OnChanges {
   updateContent(loadable: Loadable<unknown>): void {
     this.defaultComponentRef?.destroy();
     const defaultComponent = this.defaultComponents[getLoadingState(loadable)];
-    if (defaultComponent) {
+    if (defaultComponent && this.content) {
       this.content.clear();
       const factory = this.resolver.resolveComponentFactory(defaultComponent);
       this.defaultComponentRef = this.content.createComponent(factory);
@@ -104,8 +85,23 @@ export class LoadableComponent implements OnChanges {
     }
   }
 
+  isNgContentHidden(loadable: Loadable<unknown>): boolean {
+    return (
+      this.loadedRef?.nativeElement?.children?.length === 0 ||
+      !isLoaded(loadable)
+    );
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
+    if ('loadable' in changes || 'templates' in changes) {
+      this.templateRef = this.templates[getLoadingState(this.loadable)];
+    }
     if ('loadable' in changes) {
+      this.hideLoadedNgContent = this.isNgContentHidden(this.loadable);
+      this.templateContext = {
+        ...loadableTemplateContext(this.loadable),
+        type: this.loadable.type,
+      };
       this.updateContent(this.loadable);
     }
   }
