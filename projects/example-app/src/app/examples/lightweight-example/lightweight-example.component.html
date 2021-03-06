@@ -4,16 +4,12 @@
   without the usage of the `ld-loadable` component. This might be useful if you
   need more control over the display of the loadable object.
 </p>
-<button (click)="load(42, false)">Load</button>
-<button (click)="load(42, true)">Load with error</button>
-<ng-container
-  *ngIf="loadable$ | async as loadable"
-  [ngSwitch]="loadable | loadingState"
->
+<app-load-form (loadable)="loadable = $event"></app-load-form>
+<ng-container [ngSwitch]="loadable | loadingState">
   <app-loading-spinner *ngSwitchCase="'loading'"></app-loading-spinner>
   <div *ngSwitchCase="'loaded'">
     <h3>Loaded</h3>
-    <pre>{{ loadable.value | json }}</pre>
+    <pre>{{ loadable | loadedValue | json }}</pre>
   </div>
   <ld-loadable-error
     *ngSwitchCase="'error'"
