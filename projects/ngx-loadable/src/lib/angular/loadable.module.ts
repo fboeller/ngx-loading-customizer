@@ -6,6 +6,7 @@ import { LoadableComponent } from './loadable/loadable.component';
 import { defaultComponents, ModuleOptions } from './module.options';
 import { DEFAULT_COMPONENTS } from './loadable.tokens';
 import { LoadableErrorComponent } from './loadable-error/loadable-error.component';
+import { LoadableLoadingComponent } from './loadable-loading/loadable-loading.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { LoadableErrorComponent } from './loadable-error/loadable-error.componen
     LoadingStatePipe,
     LoadableComponent,
     LoadableErrorComponent,
+    LoadableLoadingComponent,
   ],
   imports: [CommonModule],
   exports: [
@@ -20,6 +22,7 @@ import { LoadableErrorComponent } from './loadable-error/loadable-error.componen
     LoadingStatePipe,
     LoadableComponent,
     LoadableErrorComponent,
+    LoadableLoadingComponent,
   ],
 })
 export class LoadableModule {

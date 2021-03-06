@@ -1,5 +1,6 @@
 import { Type } from '@angular/core';
 import { LoadableErrorComponent } from './loadable-error/loadable-error.component';
+import { LoadableLoadingComponent } from './loadable-loading/loadable-loading.component';
 
 export type DefaultComponents = {
   idle?: Type<{}>;
@@ -10,6 +11,7 @@ export type DefaultComponents = {
 
 export const defaultComponents = {
   error: LoadableErrorComponent,
+  loading: LoadableLoadingComponent,
 };
 
 export interface ModuleOptions {
