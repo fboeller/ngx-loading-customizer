@@ -1,4 +1,8 @@
 <h2>Default usage example</h2>
+<p>
+  This examples displays the default usage of the `ld-loadable` component. The
+  `LoadableModule` is imported with the default loading and error components.
+</p>
 <button (click)="load(42, false)">Load</button>
 <button (click)="load(42, true)">Load with error</button>
 <ld-loadable *ngIf="loadable$ | async as loadable" [loadable]="loadable">
