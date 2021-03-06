@@ -6,7 +6,7 @@ import { delay, mergeMap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class LoadService {
-  load(id: number, error: boolean): Observable<object> {
+  load(id: number, error: boolean, loadingTime: number): Observable<object> {
     const result = error
       ? throwError({
           status: 404,
@@ -18,7 +18,7 @@ export class LoadService {
             'Answer to the Ultimate Question of Life, the Universe, and Everything',
         });
     return of({}).pipe(
-      delay(1000),
+      delay(loadingTime),
       mergeMap(() => result)
     );
   }

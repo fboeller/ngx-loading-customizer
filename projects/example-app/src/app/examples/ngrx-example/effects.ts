@@ -11,7 +11,7 @@ export class LoadEffects {
     this.actions$.pipe(
       ofType(load),
       mergeMap((action) =>
-        this.loadService.load(action.id, action.error).pipe(
+        this.loadService.load(action.id, action.error, 1000).pipe(
           map((response) => loadSuccess({ response })),
           catchError((error) => of(loadError({ error })))
         )

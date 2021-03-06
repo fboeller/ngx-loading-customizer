@@ -18,13 +18,16 @@ export class LoadFormComponent {
 
   form = this.fb.group({
     isError: [false],
+    loadingTime: [1000],
   });
 
   constructor(private loadService: LoadService, private fb: FormBuilder) {
     this.load$
       .pipe(
         switchMap(({ id, error }) =>
-          this.loadService.load(id, error).pipe(toLoadable)
+          this.loadService
+            .load(id, error, this.form.value.loadingTime)
+            .pipe(toLoadable)
         )
       )
       .subscribe(this.loadable);
