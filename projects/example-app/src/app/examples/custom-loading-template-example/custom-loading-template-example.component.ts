@@ -7,10 +7,10 @@ import { switchMap } from 'rxjs/operators';
 import { LoadService } from '../../load.service';
 
 @Component({
-  selector: 'app-loadable-component-example',
-  templateUrl: './loadable-component-example.component.html',
+  selector: 'app-custom-loading-template-example',
+  templateUrl: './custom-loading-template-example.component.html',
 })
-export class LoadableComponentExampleComponent {
+export class CustomLoadingTemplateExampleComponent {
   load$ = new Subject<{ id: number; error: boolean }>();
   loadable$ = new BehaviorSubject(idle as Loadable<object>);
 
