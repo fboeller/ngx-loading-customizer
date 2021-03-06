@@ -1,7 +1,10 @@
 <h2>Advanced loadable example</h2>
 <button (click)="load(42, false)">Load</button>
 <button (click)="load(42, true)">Load with error</button>
-<ld-loadable [loadable]="loadable$ | async" [loaded]="loaded"></ld-loadable>
+<ld-loadable
+  [loadable]="loadable$ | async"
+  [templates]="{ loaded: loaded }"
+></ld-loadable>
 <ng-template let-value="value" #loaded>
   <h3>Loaded</h3>
   <pre>{{ value | json }}</pre>

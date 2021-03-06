@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
+import { idle } from '../../loadable.constructors';
 import {
   getLoadingState,
   hasErrored,
@@ -35,18 +36,21 @@ export function setComponentInputs(
   }
 }
 
+export type TemplateRefs = {
+  idle?: TemplateRef<void>;
+  loading?: TemplateRef<void>;
+  loaded?: TemplateRef<{ value: any }>;
+  error?: TemplateRef<{ error: any }>;
+};
+
 @Component({
   selector: 'ld-loadable',
   templateUrl: './loadable.component.html',
   styleUrls: ['./loadable.component.css'],
 })
 export class LoadableComponent implements OnChanges, OnDestroy {
-  @Input() loadable!: Loadable<unknown>;
-
-  @Input() idle?: TemplateRef<void>;
-  @Input() loading?: TemplateRef<void>;
-  @Input() loaded?: TemplateRef<{ value: any }>;
-  @Input() error?: TemplateRef<{ error: any }>;
+  @Input() loadable: Loadable<unknown> = idle;
+  @Input() templates: TemplateRefs = {};
 
   @ViewChild('content', { read: ViewContainerRef })
   content!: ViewContainerRef;
@@ -67,16 +71,7 @@ export class LoadableComponent implements OnChanges, OnDestroy {
   }
 
   get templateRef(): TemplateRef<unknown> | undefined {
-    switch (getLoadingState(this.loadable)) {
-      case 'idle':
-        return this.idle;
-      case 'loading':
-        return this.loading;
-      case 'loaded':
-        return this.loaded;
-      case 'error':
-        return this.error;
-    }
+    return this.templates[getLoadingState(this.loadable)];
   }
 
   get templateContext(): object {

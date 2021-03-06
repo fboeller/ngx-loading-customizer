@@ -7,6 +7,7 @@ export * from './lib/functions/map.function';
 export * from './lib/functions/to-loadable.function';
 
 export * from './lib/angular/loadable.module';
+export * from './lib/angular/loadable/loadable.component';
 export * from './lib/angular/is-loading.pipe';
 export * from './lib/angular/loading-state.pipe';
 export * from './lib/angular/loadable-error.type';
