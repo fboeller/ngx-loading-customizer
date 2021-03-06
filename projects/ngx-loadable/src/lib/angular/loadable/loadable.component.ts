@@ -57,7 +57,7 @@ export class LoadableComponent implements OnChanges, OnDestroy {
   defaultComponentRef?: ComponentRef<unknown>;
 
   readonly onChanges$ = new Subject<SimpleChanges>();
-  readonly onDestroy$ = new Subject<SimpleChanges>();
+  readonly onDestroy$ = new Subject<void>();
 
   get hideLoadedNgContent(): boolean {
     return (
@@ -97,8 +97,8 @@ export class LoadableComponent implements OnChanges, OnDestroy {
   }
 
   constructor(
-    resolver: ComponentFactoryResolver,
-    @Inject(DEFAULT_COMPONENTS) defaultComponents: DefaultComponents
+    private resolver: ComponentFactoryResolver,
+    @Inject(DEFAULT_COMPONENTS) private defaultComponents: DefaultComponents
   ) {
     this.onChanges$
       .pipe(
@@ -108,15 +108,19 @@ export class LoadableComponent implements OnChanges, OnDestroy {
         takeUntil(this.onDestroy$)
       )
       .subscribe((loadable: Loadable<unknown>) => {
-        this.defaultComponentRef?.destroy();
-        const defaultComponent = defaultComponents[getLoadingState(loadable)];
-        if (defaultComponent) {
-          this.content.clear();
-          const factory = resolver.resolveComponentFactory(defaultComponent);
-          this.defaultComponentRef = this.content.createComponent(factory);
-          setComponentInputs(this.defaultComponentRef, loadable);
-        }
+        this.updateContent(loadable);
       });
+  }
+
+  updateContent(loadable: Loadable<unknown>): void {
+    this.defaultComponentRef?.destroy();
+    const defaultComponent = this.defaultComponents[getLoadingState(loadable)];
+    if (defaultComponent) {
+      this.content.clear();
+      const factory = this.resolver.resolveComponentFactory(defaultComponent);
+      this.defaultComponentRef = this.content.createComponent(factory);
+      setComponentInputs(this.defaultComponentRef, loadable);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
