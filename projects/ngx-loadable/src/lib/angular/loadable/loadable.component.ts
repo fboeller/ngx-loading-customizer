@@ -75,7 +75,6 @@ export class LoadableComponent implements OnChanges {
   ) {}
 
   updateContent(loadable: Loadable<unknown>): void {
-    this.defaultComponentRef?.destroy();
     const defaultComponent = this.defaultComponents[getLoadingState(loadable)];
     if (defaultComponent && this.content) {
       this.content.clear();
@@ -102,7 +101,10 @@ export class LoadableComponent implements OnChanges {
     }
     if ('loadable' in changes || 'templates' in changes) {
       this.templateRef = this.templates[getLoadingState(this.loadable)];
-      this.updateContent(this.loadable);
+      this.defaultComponentRef?.destroy();
+      if (!this.templateRef) {
+        this.updateContent(this.loadable);
+      }
     }
   }
 }
