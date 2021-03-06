@@ -53,6 +53,7 @@ export class LoadableComponent implements OnChanges, OnDestroy {
   @Input() templates: TemplateRefs = {};
 
   private loadable$: Observable<Loadable<unknown>>;
+  private templates$: Observable<TemplateRefs>;
 
   @ViewChild('content', { read: ViewContainerRef })
   content!: ViewContainerRef;
@@ -97,6 +98,11 @@ export class LoadableComponent implements OnChanges, OnDestroy {
     private resolver: ComponentFactoryResolver,
     @Inject(DEFAULT_COMPONENTS) private defaultComponents: DefaultComponents
   ) {
+    this.templates$ = this.onChanges$.pipe(
+      filter((changes) => 'templates' in changes),
+      map((changes) => changes.templates),
+      map((change) => change.currentValue)
+    );
     this.loadable$ = this.onChanges$.pipe(
       filter((changes) => 'loadable' in changes),
       map((changes) => changes.loadable),
