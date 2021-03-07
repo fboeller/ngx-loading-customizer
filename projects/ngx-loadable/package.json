@@ -1,7 +1,7 @@
 {
   "name": "ngx-loadable",
   "version": "0.0.1",
-  "description": "TODO",
+  "description": "Angular Loadable is a library that helps you represent and show data that needs to be loaded from a backend and can therefore be in a loading state.",
   "author": "Fabian Böller",
   "license": "MIT",
   "publishConfig": {
@@ -16,7 +16,9 @@
     "url": "https://github.com/fboeller/ngx-loadable/issues"
   },
   "keywords": [
-    "angular"
+    "angular",
+    "loading",
+    "component"
   ],
   "np": {
     "yarn": false,
