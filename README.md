@@ -108,6 +108,9 @@ import { CustomLoadingAnimationComponent } from "./custom-loading-animation.comp
 export class AppModule {}
 ```
 
+Note that you can use the same mechanism to change the default error state.
+However, the component you define for that needs to define an input `error` accepting any type.
+
 ### Define a custom local loading animation
 
 In cases where you would like to refine the loading animation for the concrete usage of an `ld-loadable`, you can define and pass a loading template to the component.
@@ -124,7 +127,18 @@ In cases where you would like to refine the loading animation for the concrete u
 
 ### Define a custom error state
 
-The presented mechanism for a custom default loading animation and a custom local loading animation can also be used to change the presentation of the error state.
+To display a custom error state, you can use the same mechanism as for custom loading animation.
+The template of a custom error state can optionally accept and display the error.
+
+```html
+<ld-loadable [loadable]="loadable" [templates]="{ error: error }">
+  <h3>Loaded</h3>
+  <pre>{{ loadable | loadedValue | json }}</pre>
+</ld-loadable>
+<ng-template #error let-error="error">
+  <p>There has been an error: {{ error | json }}</p>
+</ng-template>
+```
 
 ### Change the presentation of the idle state
 
