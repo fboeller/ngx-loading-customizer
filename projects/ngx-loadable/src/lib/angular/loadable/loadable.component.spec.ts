@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { errored, idle, loaded, loading } from '../../loadable.constructors';
@@ -177,5 +177,68 @@ it('renders the custom global error state if errored', fakeAsync(() => {
     fixture.debugElement.query(By.css('ld-test-error span')).nativeElement
       .textContent
   ).toEqual('Error error');
+  expect(fixture.debugElement.query(By.css('p'))).toBeFalsy();
+}));
+
+@Component({
+  selector: 'ld-test-custom-loading',
+  template: `
+    <ld-loadable [loadable]="loadable" [templates]="{ loading: loading }">
+      <p>{{ loadable | loadedValue }}</p>
+    </ld-loadable>
+    <ng-template #loading>
+      <span>It's loading.</span>
+    </ng-template>
+  `,
+})
+class TestCustomLoadingComponent {
+  loadable = loading;
+}
+
+it('renders the custom local loading state if loading', fakeAsync(() => {
+  TestBed.configureTestingModule({
+    declarations: [TestCustomLoadingComponent],
+    imports: [LoadableModule],
+  });
+  const fixture = TestBed.createComponent(TestCustomLoadingComponent);
+  fixture.detectChanges();
+  tick(1);
+  expect(fixture.debugElement.query(By.css('ld-loadable-loading'))).toBeFalsy();
+  expect(fixture.debugElement.query(By.css('span'))).toBeTruthy();
+  expect(
+    fixture.debugElement.query(By.css('span')).nativeElement.textContent
+  ).toEqual(`It's loading.`);
+  expect(fixture.debugElement.query(By.css('p'))).toBeFalsy();
+}));
+
+@Component({
+  selector: 'ld-test-custom-error',
+  template: `
+    <ld-loadable [loadable]="loadable" [templates]="{ error: error }">
+      <p>{{ loadable | loadedValue }}</p>
+    </ld-loadable>
+    <ng-template #error let-error="error">
+      <span>There is an '{{ error }}'.</span>
+    </ng-template>
+  `,
+})
+class TestCustomErrorComponent {
+  loadable = errored('error');
+}
+
+it('renders the custom local error state if loading', fakeAsync(() => {
+  TestBed.configureTestingModule({
+    declarations: [TestCustomErrorComponent],
+    imports: [LoadableModule],
+  });
+  const fixture = TestBed.createComponent(TestCustomErrorComponent);
+  fixture.detectChanges();
+  tick(1);
+  fixture.detectChanges();
+  expect(fixture.debugElement.query(By.css('ld-loadable-error'))).toBeFalsy();
+  expect(fixture.debugElement.query(By.css('span'))).toBeTruthy();
+  expect(
+    fixture.debugElement.query(By.css('span')).nativeElement.textContent
+  ).toEqual(`There is an 'error'.`);
   expect(fixture.debugElement.query(By.css('p'))).toBeFalsy();
 }));
