@@ -1,5 +1,6 @@
 :host {
   display: block;
+  padding: 10px;
 }
 
 .links {
@@ -10,4 +11,8 @@
 
 .links > a {
   display: block;
+}
+
+.active-link {
+  color: blue;
 }
