@@ -1,5 +1,7 @@
 # Angular Loading Customizer
 
+![License](https://img.shields.io/github/license/fboeller/ngx-loading-customizer) ![Build](https://img.shields.io/github/workflow/status/fboeller/ngx-loading-customizer/CI) ![Version](https://img.shields.io/npm/v/ngx-loading-customizer)
+
 Angular Loading Customizer is a library that helps you represent and show data that needs to be loaded from a backend and can therefore be in a loading state.
 
 - **Loadable type** - The type `Loadable<T>` lets you represent the full state of your loading data with a single object. No more additional booleans passed to your components.
