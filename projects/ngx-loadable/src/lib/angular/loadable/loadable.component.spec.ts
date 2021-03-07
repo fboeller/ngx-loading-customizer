@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { errored, idle, loaded, loading } from '../../loadable.constructors';
 import { LoadableModule } from '../loadable.module';
 import {
+  TestErrorFixtureComponent,
+  TestErrorModule,
   TestLoadingSpinnerComponent,
   TestLoadingSpinnerModule,
 } from './loadable.component.fixtures';
@@ -138,5 +140,42 @@ it('renders the custom global loading state if loading', fakeAsync(() => {
   expect(
     fixture.debugElement.query(By.css('ld-test-loading-spinner'))
   ).toBeTruthy();
+  expect(fixture.debugElement.query(By.css('p'))).toBeFalsy();
+}));
+
+@Component({
+  selector: 'ld-test-default-loading',
+  template: `
+    <ld-loadable [loadable]="loadable">
+      <p>{{ loadable | loadedValue }}</p>
+    </ld-loadable>
+  `,
+})
+class TestDefaultErrorComponent {
+  loadable = errored('error');
+}
+
+it('renders the custom global error state if errored', fakeAsync(() => {
+  TestBed.configureTestingModule({
+    declarations: [TestDefaultErrorComponent],
+    imports: [
+      TestErrorModule,
+      LoadableModule.forRoot({
+        defaultComponents: {
+          error: TestErrorFixtureComponent,
+        },
+      }),
+    ],
+  });
+  const fixture = TestBed.createComponent(TestDefaultErrorComponent);
+  fixture.detectChanges();
+  tick(1);
+  fixture.detectChanges();
+  expect(fixture.debugElement.query(By.css('ld-loadable-error'))).toBeFalsy();
+  expect(fixture.debugElement.query(By.css('ld-test-error'))).toBeTruthy();
+  expect(
+    fixture.debugElement.query(By.css('ld-test-error span')).nativeElement
+      .textContent
+  ).toEqual('Error error');
   expect(fixture.debugElement.query(By.css('p'))).toBeFalsy();
 }));
