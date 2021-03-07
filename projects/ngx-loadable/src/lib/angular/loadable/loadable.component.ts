@@ -72,7 +72,9 @@ export class LoadableComponent implements OnChanges {
   constructor(
     private resolver: ComponentFactoryResolver,
     @Inject(DEFAULT_COMPONENTS) private defaultComponents: DefaultComponents
-  ) {}
+  ) {
+    console.log(this.defaultComponents);
+  }
 
   updateContent(loadable: Loadable<unknown>): void {
     const defaultComponent = this.defaultComponents[getLoadingState(loadable)];

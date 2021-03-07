@@ -6,7 +6,7 @@
 </p>
 <app-load-form (loadable)="loadable = $event"></app-load-form>
 <ng-container [ngSwitch]="loadable | loadingState">
-  <app-loading-spinner *ngSwitchCase="'loading'"></app-loading-spinner>
+  <ld-loadable-loading *ngSwitchCase="'loading'"></ld-loadable-loading>
   <div *ngSwitchCase="'loaded'">
     <h3>Loaded</h3>
     <pre>{{ loadable | loadedValue | json }}</pre>
