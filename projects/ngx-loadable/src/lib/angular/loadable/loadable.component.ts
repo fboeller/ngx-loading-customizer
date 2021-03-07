@@ -45,7 +45,6 @@ function loadableTemplateContext(loadable: Loadable<unknown>): object {
 export type TemplateRefs = {
   idle?: TemplateRef<void>;
   loading?: TemplateRef<void>;
-  loaded?: TemplateRef<{ value: any }>;
   error?: TemplateRef<{ error: any }>;
 };
 
@@ -61,20 +60,15 @@ export class LoadableComponent implements OnChanges {
   @ViewChild('content', { read: ViewContainerRef })
   content?: ViewContainerRef;
 
-  @ViewChild('loadedRef')
-  loadedRef?: any;
-
   defaultComponentRef?: ComponentRef<unknown>;
   templateRef?: TemplateRef<unknown>;
-  hideLoadedNgContent = true;
+  showNgContent = false;
   templateContext?: object;
 
   constructor(
     private resolver: ComponentFactoryResolver,
     @Inject(DEFAULT_COMPONENTS) private defaultComponents: DefaultComponents
-  ) {
-    console.log(this.defaultComponents);
-  }
+  ) {}
 
   updateContent(loadable: Loadable<unknown>): void {
     const defaultComponent = this.defaultComponents[getLoadingState(loadable)];
@@ -86,26 +80,22 @@ export class LoadableComponent implements OnChanges {
     }
   }
 
-  isNgContentHidden(loadable: Loadable<unknown>): boolean {
-    return (
-      this.loadedRef?.nativeElement?.children?.length === 0 ||
-      !isLoaded(loadable)
-    );
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     if ('loadable' in changes) {
-      this.hideLoadedNgContent = this.isNgContentHidden(this.loadable);
+      this.showNgContent = isLoaded(this.loadable);
       this.templateContext = {
         ...loadableTemplateContext(this.loadable),
         type: this.loadable.type,
       };
     }
     if ('loadable' in changes || 'templates' in changes) {
-      this.templateRef = this.templates[getLoadingState(this.loadable)];
       this.defaultComponentRef?.destroy();
-      if (!this.templateRef) {
-        this.updateContent(this.loadable);
+      const loadingState = getLoadingState(this.loadable);
+      if (loadingState !== 'loaded') {
+        this.templateRef = this.templates[loadingState];
+        if (!this.templateRef) {
+          this.updateContent(this.loadable);
+        }
       }
     }
   }
