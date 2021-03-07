@@ -1,11 +1,19 @@
-<h2>Custom default loading template</h2>
-<p>
-  This example displays the usage of the `ld-loadable` component with a loading
-  component that is registered as a default for all `ld-loadable` components in
-  that module.
-</p>
-<app-load-form (loadable)="loadable = $event"></app-load-form>
-<ld-loadable [loadable]="loadable">
-  <h3>Loaded</h3>
-  <pre>{{ loadable | loadedValue | json }}</pre>
-</ld-loadable>
+<div class="main">
+  <h2>Custom default loading template</h2>
+  <p>
+    This example displays the usage of the `ld-loadable` component with a
+    loading component that is registered as a default for all `ld-loadable`
+    components in that module.
+  </p>
+  <app-load-form (loadable)="loadable = $event"></app-load-form>
+  <ld-loadable [loadable]="loadable">
+    <h3>Loaded</h3>
+    <pre>{{ loadable | loadedValue | json }}</pre>
+  </ld-loadable>
+</div>
+<aside>
+  <div>
+    <h3>State of the loadable</h3>
+    <pre>{{ loadable | json }}</pre>
+  </div>
+</aside>

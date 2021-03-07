@@ -1,14 +1,22 @@
-<h2>Default usage example</h2>
-<p>
-  This examples displays the default usage of the `ld-loadable` component. The
-  `LoadableModule` is imported with the default loading and error components.
-</p>
-<app-load-form (loadable)="loadable = $event"></app-load-form>
-<div>
-  <h3>State of the loadable</h3>
-  <pre>{{ loadable | json }}</pre>
+<div class="main">
+  <h2>Default usage example</h2>
+  <p>
+    This examples displays the default usage of the `ld-loadable` component. The
+    `LoadableModule` is imported with the default loading and error components.
+  </p>
+  <app-load-form (loadable)="loadable = $event"></app-load-form>
+  <div>
+    <h3>State of the loadable</h3>
+    <pre>{{ loadable | json }}</pre>
+  </div>
+  <ld-loadable [loadable]="loadable">
+    <h3>Loaded</h3>
+    <pre>{{ loadable | loadedValue | json }}</pre>
+  </ld-loadable>
 </div>
-<ld-loadable [loadable]="loadable">
-  <h3>Loaded</h3>
-  <pre>{{ loadable | loadedValue | json }}</pre>
-</ld-loadable>
+<aside>
+  <div>
+    <h3>State of the loadable</h3>
+    <pre>{{ loadable | json }}</pre>
+  </div>
+</aside>

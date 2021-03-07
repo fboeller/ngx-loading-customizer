@@ -1,18 +1,26 @@
-<h2>Lightweight example</h2>
-<p>
-  This example displays the usage of the loadable type in Angular components
-  without the usage of the `ld-loadable` component. This might be useful if you
-  need more control over the display of the loadable object.
-</p>
-<app-load-form (loadable)="loadable = $event"></app-load-form>
-<ng-container [ngSwitch]="loadable | loadingState">
-  <ld-loadable-loading *ngSwitchCase="'loading'"></ld-loadable-loading>
-  <div *ngSwitchCase="'loaded'">
-    <h3>Loaded</h3>
-    <pre>{{ loadable | loadedValue | json }}</pre>
+<div class="main">
+  <h2>Lightweight example</h2>
+  <p>
+    This example displays the usage of the loadable type in Angular components
+    without the usage of the `ld-loadable` component. This might be useful if
+    you need more control over the display of the loadable object.
+  </p>
+  <app-load-form (loadable)="loadable = $event"></app-load-form>
+  <ng-container [ngSwitch]="loadable | loadingState">
+    <ld-loadable-loading *ngSwitchCase="'loading'"></ld-loadable-loading>
+    <div *ngSwitchCase="'loaded'">
+      <h3>Loaded</h3>
+      <pre>{{ loadable | loadedValue | json }}</pre>
+    </div>
+    <ld-loadable-error
+      *ngSwitchCase="'error'"
+      [error]="loadable.error"
+    ></ld-loadable-error>
+  </ng-container>
+</div>
+<aside>
+  <div>
+    <h3>State of the loadable</h3>
+    <pre>{{ loadable | json }}</pre>
   </div>
-  <ld-loadable-error
-    *ngSwitchCase="'error'"
-    [error]="loadable.error"
-  ></ld-loadable-error>
-</ng-container>
+</aside>

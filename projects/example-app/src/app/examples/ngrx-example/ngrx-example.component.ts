@@ -6,6 +6,7 @@ import { selectResponse } from './selector';
 @Component({
   selector: 'app-ngrx-example',
   templateUrl: './ngrx-example.component.html',
+  styleUrls: ['./ngrx-example.component.css'],
 })
 export class NgrxExampleComponent {
   loadable$ = this.store.select(selectResponse);

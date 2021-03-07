@@ -14,8 +14,7 @@ export class LoadService {
         })
       : of({
           id,
-          name:
-            'Answer to the Ultimate Question of Life, the Universe, and Everything',
+          name: 'Answer to the Ultimate Question',
         });
     return of({}).pipe(
       delay(loadingTime),

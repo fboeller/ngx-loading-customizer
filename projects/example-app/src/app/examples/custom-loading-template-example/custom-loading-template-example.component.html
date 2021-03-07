@@ -1,24 +1,28 @@
-<h2>Custom loading template</h2>
-<p>
-  This example displays the usage of the `ld-loadable` component with a custom
-  loading template. The left loadable uses the custom loading template while the
-  right component uses the default.
-</p>
-<app-load-form (loadable)="loadable = $event"></app-load-form>
-<div>
-  <h3>State of the loadable</h3>
-  <pre>{{ loadable | json }}</pre>
+<div class="main">
+  <h2>Custom loading template</h2>
+  <p>
+    This example displays the usage of the `ld-loadable` component with a custom
+    loading template. The left loadable uses the custom loading template while
+    the right component uses the default.
+  </p>
+  <app-load-form (loadable)="loadable = $event"></app-load-form>
+  <div class="loadables">
+    <ld-loadable [loadable]="loadable" [templates]="{ loading: loading }">
+      <h3>Loaded</h3>
+      <pre>{{ loadable | loadedValue | json }}</pre>
+    </ld-loadable>
+    <ng-template #loading>
+      <p>The answer is currently being computed.</p>
+    </ng-template>
+    <ld-loadable [loadable]="loadable">
+      <h3>Loaded</h3>
+      <pre>{{ loadable | loadedValue | json }}</pre>
+    </ld-loadable>
+  </div>
 </div>
-<div class="loadables">
-  <ld-loadable [loadable]="loadable" [templates]="{ loading: loading }">
-    <h3>Loaded</h3>
-    <pre>{{ loadable | loadedValue | json }}</pre>
-  </ld-loadable>
-  <ng-template #loading>
-    <p>The answer is currently being computed.</p>
-  </ng-template>
-  <ld-loadable [loadable]="loadable">
-    <h3>Loaded</h3>
-    <pre>{{ loadable | loadedValue | json }}</pre>
-  </ld-loadable>
-</div>
+<aside>
+  <div>
+    <h3>State of the loadable</h3>
+    <pre>{{ loadable | json }}</pre>
+  </div>
+</aside>
