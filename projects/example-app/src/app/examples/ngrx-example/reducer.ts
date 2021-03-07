@@ -4,8 +4,8 @@ import {
   idle,
   loaded,
   loading,
-} from 'projects/ngx-loadable/src/lib/loadable.constructors';
-import { Loadable } from 'projects/ngx-loadable/src/lib/loadable.type';
+} from 'projects/ngx-loading-customizer/src/lib/loadable.constructors';
+import { Loadable } from 'projects/ngx-loading-customizer/src/lib/loadable.type';
 import { load, loadError, loadSuccess } from './actions';
 
 const reducer = createReducer(

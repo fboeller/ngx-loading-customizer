@@ -3,21 +3,21 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-loadable": {
+    "ngx-loading-customizer": {
       "projectType": "library",
-      "root": "projects/ngx-loadable",
-      "sourceRoot": "projects/ngx-loadable/src",
+      "root": "projects/ngx-loading-customizer",
+      "sourceRoot": "projects/ngx-loading-customizer/src",
       "prefix": "ld",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/ngx-loadable/tsconfig.lib.json",
-            "project": "projects/ngx-loadable/ng-package.json"
+            "tsConfig": "projects/ngx-loading-customizer/tsconfig.lib.json",
+            "project": "projects/ngx-loading-customizer/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ngx-loadable/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngx-loading-customizer/tsconfig.lib.prod.json"
             }
           }
         },
@@ -25,8 +25,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ngx-loadable/tsconfig.lib.json",
-              "projects/ngx-loadable/tsconfig.spec.json"
+              "projects/ngx-loading-customizer/tsconfig.lib.json",
+              "projects/ngx-loading-customizer/tsconfig.spec.json"
             ],
             "exclude": ["**/node_modules/**"]
           }
@@ -106,5 +106,5 @@
       }
     }
   },
-  "defaultProject": "ngx-loadable"
+  "defaultProject": "ngx-loading-customizer"
 }

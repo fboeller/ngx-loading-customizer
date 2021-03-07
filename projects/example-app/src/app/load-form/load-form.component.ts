@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { toLoadable } from 'projects/ngx-loadable/src/lib/functions/to-loadable.function';
-import { Loadable } from 'projects/ngx-loadable/src/public-api';
+import { toLoadable } from 'projects/ngx-loading-customizer/src/lib/functions/to-loadable.function';
+import { Loadable } from 'projects/ngx-loading-customizer/src/public-api';
 import { Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { LoadService } from '../load.service';

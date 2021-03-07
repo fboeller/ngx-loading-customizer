@@ -11,16 +11,16 @@ Angular Loadable is a library that helps you represent and show data that needs 
 ## Installation
 
 ```
-npm install --save ngx-loadable
+npm install --save ngx-loading-customizer
 ```
 
 ## Try it
 
-This repo includes an example application showcasing the usage of ngx-loadable.
+This repo includes an example application showcasing the usage of ngx-loading-customizer.
 
 ```
-$ git clone https://github.com/fboeller/ngx-loadable.git
-$ cd ngx-loadable
+$ git clone https://github.com/fboeller/ngx-loading-customizer.git
+$ cd ngx-loading-customizer
 $ npm install
 $ npm start example-app
 ```
@@ -32,7 +32,7 @@ $ npm start example-app
 Given an observable, you can construct a loadable with the operator `toLoadable`.
 
 ```typescript
-import { toLoadable } from "ngx-loadable";
+import { toLoadable } from "ngx-loading-customizer";
 import { of } from "rxjs";
 
 const loadable$ = of({ id: 42 }).pipe(toLoadable);
@@ -46,7 +46,7 @@ First, make sure to import the `LoadableModule` in your module.
 
 ```typescript
 import { NgModule } from "@angular/core";
-import { LoadableModule } from "ngx-loadable";
+import { LoadableModule } from "ngx-loading-customizer";
 import { CommonModule } from "@angular/common";
 
 @NgModule({
@@ -60,7 +60,7 @@ You can use `idle`, `loading`, `loaded('value')` and `errored('error')` to const
 
 ```typescript
 import { Component } from "@angular/core";
-import { idle, Loadable } from "ngx-loadable";
+import { idle, Loadable } from "ngx-loading-customizer";
 
 @Component({
   selector: "app-some",
@@ -92,7 +92,7 @@ Create your custom loading animation component and pass it to the `LoadableModul
 
 ```typescript
 import { NgModule } from "@angular/core";
-import { LoadableModule } from "ngx-loadable";
+import { LoadableModule } from "ngx-loading-customizer";
 import { CustomLoadingAnimationComponent } from "./custom-loading-animation.component";
 
 @NgModule({
@@ -148,8 +148,8 @@ In case you would like to show a loading animation immediately, you can change t
 
 ```typescript
 import { NgModule } from "@angular/core";
-import { LoadableModule } from "ngx-loadable";
-import { LoadableLoadingComponent } from "ngx-loadable";
+import { LoadableModule } from "ngx-loading-customizer";
+import { LoadableLoadingComponent } from "ngx-loading-customizer";
 
 @NgModule({
   imports: [
@@ -171,7 +171,7 @@ It defines some utility functions to work with it.
 If you have a loadable and want to change its value once it is loaded, you can use `map`.
 
 ```typescript
-import { map, loaded } from "ngx-loadable";
+import { map, loaded } from "ngx-loading-customizer";
 const loadable = loaded(5);
 const result = map((x) => x + 10, loadable); // loaded(15)
 ```
@@ -179,7 +179,7 @@ const result = map((x) => x + 10, loadable); // loaded(15)
 If you have a loadable and want to map it to another loadable once it is loaded, you can use `flatMap`.
 
 ```typescript
-import { flatMap, loaded } from "ngx-loadable";
+import { flatMap, loaded } from "ngx-loading-customizer";
 const loadable = loaded(5);
 const result = flatMap((x) => loaded(x + 10), loadable); // loaded(15)
 ```

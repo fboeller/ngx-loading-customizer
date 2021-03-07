@@ -1,5 +1,5 @@
 {
-  "name": "ngx-loadable",
+  "name": "ngx-loading-customizer",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,8 +9,8 @@
     "prettier": "npx prettier --write .",
     "prettier-check": "npx prettier --check .",
     "check": "npm run lint && npm run test && npm run prettier-check",
-    "build-lib": "ng build ngx-loadable --prod && cp ./README.md ./dist/ngx-loadable/ && cp ./LICENSE ./dist/ngx-loadable/",
-    "npm-pack": "cd dist/ngx-loadable && npm pack && cd ../..",
+    "build-lib": "ng build ngx-loading-customizer --prod && cp ./README.md ./dist/ngx-loading-customizer/ && cp ./LICENSE ./dist/ngx-loading-customizer/",
+    "npm-pack": "cd dist/ngx-loading-customizer && npm pack && cd ../..",
     "package": "npm run build-lib && npm run npm-pack"
   },
   "husky": {
@@ -21,14 +21,14 @@
   "jest": {
     "preset": "jest-preset-angular",
     "setupFilesAfterEnv": [
-      "<rootDir>/projects/ngx-loadable/setup-jest.ts"
+      "<rootDir>/projects/ngx-loading-customizer/setup-jest.ts"
     ],
     "roots": [
-      "<rootDir>/projects/ngx-loadable/src"
+      "<rootDir>/projects/ngx-loading-customizer/src"
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "<rootDir>/projects/ngx-loadable/src/**/{!(public-api),}.{ts,js}"
+      "<rootDir>/projects/ngx-loading-customizer/src/**/{!(public-api),}.{ts,js}"
     ],
     "clearMocks": true,
     "coverageThreshold": {
@@ -41,7 +41,7 @@
     },
     "globals": {
       "ts-jest": {
-        "tsconfig": "<rootDir>/projects/ngx-loadable/tsconfig.spec.json"
+        "tsconfig": "<rootDir>/projects/ngx-loading-customizer/tsconfig.spec.json"
       }
     }
   },

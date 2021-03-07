@@ -13,6 +13,6 @@
 
 ## Publish
 
-- Adjust version in [package.json](./projects/ngx-loadable/package.json)
+- Adjust version in [package.json](./projects/ngx-loading-customizer/package.json)
 - `npm run package`
-- (You need to have npm access to do that): `npm publish ./dist/ngx-loadable/ngx-loadable-x.x.x.tgz`
+- (You need to have npm access to do that): `npm publish ./dist/ngx-loading-customizer/ngx-loading-customizer-x.x.x.tgz`
