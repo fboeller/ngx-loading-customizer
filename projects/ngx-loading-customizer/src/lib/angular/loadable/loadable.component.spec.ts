@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { errored, idle, loaded, loading } from '../../loadable.constructors';
-import { LoadableModule } from '../loadable.module';
+import { LoadingCustomizerModule } from '../loading-customizer.module';
 import {
   TestErrorFixtureComponent,
   TestErrorModule,
@@ -25,7 +25,7 @@ class TestLoadedComponent {
 it('renders the loaded value', () => {
   TestBed.configureTestingModule({
     declarations: [TestLoadedComponent],
-    imports: [LoadableModule],
+    imports: [LoadingCustomizerModule],
   });
   const fixture = TestBed.createComponent(TestLoadedComponent);
   fixture.detectChanges();
@@ -49,7 +49,7 @@ class TestLoadingComponent {
 it('renders the default loading state if loading', fakeAsync(() => {
   TestBed.configureTestingModule({
     declarations: [TestLoadingComponent],
-    imports: [LoadableModule],
+    imports: [LoadingCustomizerModule],
   });
   const fixture = TestBed.createComponent(TestLoadingComponent);
   fixture.detectChanges();
@@ -75,7 +75,7 @@ class TestErrorComponent {
 it('renders the default error component if errored', fakeAsync(() => {
   TestBed.configureTestingModule({
     declarations: [TestErrorComponent],
-    imports: [LoadableModule],
+    imports: [LoadingCustomizerModule],
   });
   const fixture = TestBed.createComponent(TestErrorComponent);
   fixture.detectChanges();
@@ -99,7 +99,7 @@ class TestIdleComponent {
 it('renders nothing if idle', () => {
   TestBed.configureTestingModule({
     declarations: [TestIdleComponent],
-    imports: [LoadableModule],
+    imports: [LoadingCustomizerModule],
   });
   const fixture = TestBed.createComponent(TestIdleComponent);
   fixture.detectChanges();
@@ -126,7 +126,7 @@ it('renders the custom global loading state if loading', fakeAsync(() => {
     declarations: [TestDefaultLoadingComponent],
     imports: [
       TestLoadingSpinnerModule,
-      LoadableModule.forRoot({
+      LoadingCustomizerModule.forRoot({
         defaultComponents: {
           loading: TestLoadingSpinnerComponent,
         },
@@ -160,7 +160,7 @@ it('renders the custom global error state if errored', fakeAsync(() => {
     declarations: [TestDefaultErrorComponent],
     imports: [
       TestErrorModule,
-      LoadableModule.forRoot({
+      LoadingCustomizerModule.forRoot({
         defaultComponents: {
           error: TestErrorFixtureComponent,
         },
@@ -198,7 +198,7 @@ class TestCustomLoadingComponent {
 it('renders the custom local loading state if loading', fakeAsync(() => {
   TestBed.configureTestingModule({
     declarations: [TestCustomLoadingComponent],
-    imports: [LoadableModule],
+    imports: [LoadingCustomizerModule],
   });
   const fixture = TestBed.createComponent(TestCustomLoadingComponent);
   fixture.detectChanges();
@@ -229,7 +229,7 @@ class TestCustomErrorComponent {
 it('renders the custom local error state if loading', fakeAsync(() => {
   TestBed.configureTestingModule({
     declarations: [TestCustomErrorComponent],
-    imports: [LoadableModule],
+    imports: [LoadingCustomizerModule],
   });
   const fixture = TestBed.createComponent(TestCustomErrorComponent);
   fixture.detectChanges();

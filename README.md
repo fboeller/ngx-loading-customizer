@@ -1,6 +1,6 @@
-# Angular Loadable
+# Angular Loading Customizer
 
-Angular Loadable is a library that helps you represent and show data that needs to be loaded from a backend and can therefore be in a loading state.
+Angular Loading Customizer is a library that helps you represent and show data that needs to be loaded from a backend and can therefore be in a loading state.
 
 - **Loadable type** - The type `Loadable<T>` lets you represent the full state of your loading data with a single object. No more additional booleans passed to your components.
 - **Loadable component** - The component `ld-loadable` shows your loaded data, a loading animation or an error state depending on the state of the loadable object.
@@ -42,15 +42,15 @@ const loadable$ = of({ id: 42 }).pipe(toLoadable);
 
 If you have an object of type `Loadable<T>`, you can display it with the `ld-loadable` component.
 
-First, make sure to import the `LoadableModule` in your module.
+First, make sure to import the `LoadingCustomizerModule` in your module.
 
 ```typescript
 import { NgModule } from "@angular/core";
-import { LoadableModule } from "ngx-loading-customizer";
+import { LoadingCustomizerModule } from "ngx-loading-customizer";
 import { CommonModule } from "@angular/common";
 
 @NgModule({
-  imports: [LoadableModule],
+  imports: [LoadingCustomizerModule],
 })
 export class AppModule {}
 ```
@@ -88,17 +88,17 @@ Note that this inner template is only rendered in the `loaded` state and this ex
 You can define a custom default loading animation within your application.
 Note that the way Angular providers work, these defaults are global within your lazy-loaded module.
 
-Create your custom loading animation component and pass it to the `LoadableModule`. Each `ld-loadable` component now defaults to this loading animation component.
+Create your custom loading animation component and pass it to the `LoadingCustomizerModule`. Each `ld-loadable` component now defaults to this loading animation component.
 
 ```typescript
 import { NgModule } from "@angular/core";
-import { LoadableModule } from "ngx-loading-customizer";
+import { LoadingCustomizerModule } from "ngx-loading-customizer";
 import { CustomLoadingAnimationComponent } from "./custom-loading-animation.component";
 
 @NgModule({
   declarations: [CustomLoadingAnimationComponent],
   imports: [
-    LoadableModule.forRoot({
+    LoadingCustomizerModule.forRoot({
       defaultComponents: {
         loading: CustomLoadingAnimationComponent,
       },
@@ -148,12 +148,12 @@ In case you would like to show a loading animation immediately, you can change t
 
 ```typescript
 import { NgModule } from "@angular/core";
-import { LoadableModule } from "ngx-loading-customizer";
+import { LoadingCustomizerModule } from "ngx-loading-customizer";
 import { LoadableLoadingComponent } from "ngx-loading-customizer";
 
 @NgModule({
   imports: [
-    LoadableModule.forRoot({
+    LoadingCustomizerModule.forRoot({
       defaultComponents: {
         idle: LoadableLoadingComponent,
       },

@@ -6,7 +6,7 @@ export * from './lib/functions/from-promise.function';
 export * from './lib/functions/map.function';
 export * from './lib/functions/to-loadable.function';
 
-export * from './lib/angular/loadable.module';
+export * from './lib/angular/loading-customizer.module';
 export * from './lib/angular/loadable/loadable.component';
 export * from './lib/angular/loadable-error/loadable-error.component';
 export * from './lib/angular/loadable-loading/loadable-loading.component';

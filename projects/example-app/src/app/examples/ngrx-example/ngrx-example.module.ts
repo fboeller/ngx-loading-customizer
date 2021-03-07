@@ -5,7 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import { responseReducer } from './reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { LoadEffects } from './effects';
-import { LoadableModule } from 'projects/ngx-loading-customizer/src/lib/angular/loadable.module';
+import { LoadingCustomizerModule } from 'projects/ngx-loading-customizer/src/lib/angular/loading-customizer.module';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -19,7 +19,7 @@ import { RouterModule } from '@angular/router';
         component: NgrxExampleComponent,
       },
     ]),
-    LoadableModule,
+    LoadingCustomizerModule,
     StoreModule.forRoot({
       response: responseReducer,
     }),

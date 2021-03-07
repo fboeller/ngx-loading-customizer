@@ -29,12 +29,12 @@ import { LoadedValuePipe } from './loaded-value.pipe';
   ],
   entryComponents: [LoadableLoadingComponent, LoadableErrorComponent],
 })
-export class LoadableModule {
+export class LoadingCustomizerModule {
   public static forRoot(
     options: ModuleOptions = {}
-  ): ModuleWithProviders<LoadableModule> {
+  ): ModuleWithProviders<LoadingCustomizerModule> {
     return {
-      ngModule: LoadableModule,
+      ngModule: LoadingCustomizerModule,
       providers: [
         {
           provide: DEFAULT_COMPONENTS,

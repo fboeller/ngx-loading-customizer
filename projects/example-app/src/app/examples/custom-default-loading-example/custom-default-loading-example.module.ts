@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { LoadableModule } from 'projects/ngx-loading-customizer/src/lib/angular/loadable.module';
+import { LoadingCustomizerModule } from 'projects/ngx-loading-customizer/src/lib/angular/loading-customizer.module';
 import { LoadFormModule } from '../../load-form/load-form.module';
 import { CustomDefaultLoadingExampleComponent } from './custom-default-loading-example.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
@@ -18,7 +18,7 @@ import { RouterModule } from '@angular/router';
         component: CustomDefaultLoadingExampleComponent,
       },
     ]),
-    LoadableModule.forRoot({
+    LoadingCustomizerModule.forRoot({
       defaultComponents: {
         loading: LoadingSpinnerComponent,
       },
