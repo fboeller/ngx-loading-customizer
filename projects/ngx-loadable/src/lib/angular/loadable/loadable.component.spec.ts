@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { errored, idle, loaded, loading } from '../../loadable.constructors';
 import { LoadableModule } from '../loadable.module';
+import {
+  TestLoadingSpinnerComponent,
+  TestLoadingSpinnerModule,
+} from './loadable.component.fixtures';
 
 @Component({
   selector: 'ld-test-loaded',
@@ -102,3 +106,37 @@ it('renders nothing if idle', () => {
       .length
   ).toEqual(0);
 });
+
+@Component({
+  selector: 'ld-test-default-loading',
+  template: `
+    <ld-loadable [loadable]="loadable">
+      <p>{{ loadable | loadedValue }}</p>
+    </ld-loadable>
+  `,
+})
+class TestDefaultLoadingComponent {
+  loadable = loading;
+}
+
+it('renders the custom global loading state if loading', fakeAsync(() => {
+  TestBed.configureTestingModule({
+    declarations: [TestDefaultLoadingComponent],
+    imports: [
+      TestLoadingSpinnerModule,
+      LoadableModule.forRoot({
+        defaultComponents: {
+          loading: TestLoadingSpinnerComponent,
+        },
+      }),
+    ],
+  });
+  const fixture = TestBed.createComponent(TestDefaultLoadingComponent);
+  fixture.detectChanges();
+  tick(1);
+  expect(fixture.debugElement.query(By.css('ld-loadable-loading'))).toBeFalsy();
+  expect(
+    fixture.debugElement.query(By.css('ld-test-loading-spinner'))
+  ).toBeTruthy();
+  expect(fixture.debugElement.query(By.css('p'))).toBeFalsy();
+}));
