@@ -1,6 +1,6 @@
 # Angular Loading Customizer
 
-![License](https://img.shields.io/github/license/fboeller/ngx-loading-customizer) ![Build](https://img.shields.io/github/workflow/status/fboeller/ngx-loading-customizer/CI) ![Version](https://img.shields.io/npm/v/ngx-loading-customizer)
+![License](https://img.shields.io/github/license/fboeller/ngx-loading-customizer) ![Build](https://img.shields.io/github/workflow/status/fboeller/ngx-loading-customizer/CI) [![codecov](https://codecov.io/gh/fboeller/ngx-loading-customizer/branch/main/graph/badge.svg?token=QMQFX7H9CP)](https://codecov.io/gh/fboeller/ngx-loading-customizer) ![Version](https://img.shields.io/npm/v/ngx-loading-customizer)
 
 Angular Loading Customizer is a library that helps you represent and show data that needs to be loaded from a backend and can therefore be in a loading state.
 
