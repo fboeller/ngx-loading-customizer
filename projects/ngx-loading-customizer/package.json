@@ -1,6 +1,6 @@
 {
   "name": "ngx-loading-customizer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Angular Loading Customizer is a library that helps you represent and show data that needs to be loaded from an external source.",
   "author": "Fabian Böller",
   "license": "MIT",
