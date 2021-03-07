@@ -18,3 +18,14 @@ a {
 a:hover {
   color: blue;
 }
+
+pre code {
+  background-color: #eee;
+  border: 1px solid #999;
+  display: block;
+  padding: 20px;
+}
+
+aside {
+  padding: 10px;
+}

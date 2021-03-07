@@ -8,12 +8,12 @@
   <app-load-form (loadable)="loadable = $event"></app-load-form>
   <ld-loadable [loadable]="loadable">
     <h3>Loaded</h3>
-    <pre>{{ loadable | loadedValue | json }}</pre>
+    <pre><code>{{ loadable | loadedValue | json }}</code></pre>
   </ld-loadable>
 </div>
 <aside>
   <div>
     <h3>State of the loadable</h3>
-    <pre>{{ loadable | json }}</pre>
+    <pre><code>{{ loadable | json }}</code></pre>
   </div>
 </aside>

@@ -9,20 +9,20 @@
   <div class="loadables">
     <ld-loadable [loadable]="loadable" [templates]="{ loading: loading }">
       <h3>Loaded</h3>
-      <pre>{{ loadable | loadedValue | json }}</pre>
+      <pre><code>{{ loadable | loadedValue | json }}</code></pre>
     </ld-loadable>
     <ng-template #loading>
       <p>The answer is currently being computed.</p>
     </ng-template>
     <ld-loadable [loadable]="loadable">
       <h3>Loaded</h3>
-      <pre>{{ loadable | loadedValue | json }}</pre>
+      <pre><code>{{ loadable | loadedValue | json }}</code></pre>
     </ld-loadable>
   </div>
 </div>
 <aside>
   <div>
     <h3>State of the loadable</h3>
-    <pre>{{ loadable | json }}</pre>
+    <pre><code>{{ loadable | json }}</code></pre>
   </div>
 </aside>

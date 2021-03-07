@@ -10,7 +10,7 @@
     <ld-loadable-loading *ngSwitchCase="'loading'"></ld-loadable-loading>
     <div *ngSwitchCase="'loaded'">
       <h3>Loaded</h3>
-      <pre>{{ loadable | loadedValue | json }}</pre>
+      <pre><code>{{ loadable | loadedValue | json }}</code></pre>
     </div>
     <ld-loadable-error
       *ngSwitchCase="'error'"
@@ -21,6 +21,6 @@
 <aside>
   <div>
     <h3>State of the loadable</h3>
-    <pre>{{ loadable | json }}</pre>
+    <pre><code>{{ loadable | json }}</code></pre>
   </div>
 </aside>

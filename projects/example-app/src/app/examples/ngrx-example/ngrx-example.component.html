@@ -8,12 +8,12 @@
   <button (click)="load(42, true)">Load with error</button>
   <ld-loadable *ngIf="loadable$ | async as loadable" [loadable]="loadable">
     <h3>Loaded</h3>
-    <pre>{{ loadable.value | json }}</pre>
+    <pre><code>{{ loadable.value | json }}</code></pre>
   </ld-loadable>
 </div>
 <aside>
   <div>
     <h3>State of the loadable</h3>
-    <pre>{{ loadable$ | async | json }}</pre>
+    <pre><code>{{ loadable$ | async | json }}</code></pre>
   </div>
 </aside>
