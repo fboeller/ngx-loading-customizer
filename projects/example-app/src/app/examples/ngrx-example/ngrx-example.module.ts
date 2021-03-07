@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { NgrxExampleComponent } from './ngrx-example.component';
@@ -7,11 +6,12 @@ import { responseReducer } from './reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { LoadEffects } from './effects';
 import { LoadableModule } from 'projects/ngx-loadable/src/lib/angular/loadable.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [NgrxExampleComponent],
   imports: [
-    BrowserModule,
+    CommonModule,
     LoadableModule,
     StoreModule.forRoot({
       response: responseReducer,
