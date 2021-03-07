@@ -7,17 +7,23 @@ import { EffectsModule } from '@ngrx/effects';
 import { LoadEffects } from './effects';
 import { LoadableModule } from 'projects/ngx-loadable/src/lib/angular/loadable.module';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [NgrxExampleComponent],
   imports: [
     CommonModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: NgrxExampleComponent,
+      },
+    ]),
     LoadableModule,
     StoreModule.forRoot({
       response: responseReducer,
     }),
     EffectsModule.forRoot([LoadEffects]),
   ],
-  exports: [NgrxExampleComponent],
 })
 export class NgrxExampleModule {}
