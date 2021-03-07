@@ -86,7 +86,6 @@ export class LoadableComponent implements OnChanges, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges', this.loadable, this.templates);
     if ('loadable' in changes) {
       this.showNgContent = isLoaded(this.loadable);
       this.templateContext = {
@@ -104,6 +103,6 @@ export class LoadableComponent implements OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.updateContent();
+    setTimeout(() => this.updateContent());
   }
 }

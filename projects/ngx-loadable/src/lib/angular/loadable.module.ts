@@ -27,6 +27,7 @@ import { LoadedValuePipe } from './loaded-value.pipe';
     LoadableErrorComponent,
     LoadableLoadingComponent,
   ],
+  entryComponents: [LoadableLoadingComponent, LoadableErrorComponent],
 })
 export class LoadableModule {
   public static forRoot(
