@@ -28,7 +28,7 @@
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "<rootDir>/projects/ngx-loadable/src/**/*.{ts,js}"
+      "<rootDir>/projects/ngx-loadable/src/**/{!(public-api),}.{ts,js}"
     ],
     "clearMocks": true,
     "coverageThreshold": {
