@@ -76,6 +76,10 @@ export class LoadableComponent implements OnChanges, AfterViewInit {
   ) {}
 
   updateContent(): void {
+    if (this.loadingState === 'loaded') {
+      return;
+    }
+    this.templateRef = this.templates[this.loadingState];
     const defaultComponent = this.defaultComponents[this.loadingState];
     if (!this.templateRef && defaultComponent && this.content) {
       this.content.clear();
@@ -95,10 +99,7 @@ export class LoadableComponent implements OnChanges, AfterViewInit {
     }
     if ('loadable' in changes || 'templates' in changes) {
       this.defaultComponentRef?.destroy();
-      if (this.loadingState !== 'loaded') {
-        this.templateRef = this.templates[this.loadingState];
-        this.updateContent();
-      }
+      this.updateContent();
     }
   }
 

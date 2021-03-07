@@ -5,10 +5,6 @@
     `LoadableModule` is imported with the default loading and error components.
   </p>
   <app-load-form (loadable)="loadable = $event"></app-load-form>
-  <div>
-    <h3>State of the loadable</h3>
-    <pre>{{ loadable | json }}</pre>
-  </div>
   <ld-loadable [loadable]="loadable">
     <h3>Loaded</h3>
     <pre>{{ loadable | loadedValue | json }}</pre>

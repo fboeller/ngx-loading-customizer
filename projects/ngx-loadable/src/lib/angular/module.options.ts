@@ -5,7 +5,6 @@ import { LoadableLoadingComponent } from './loadable-loading/loadable-loading.co
 export type DefaultComponents = {
   idle?: Type<{}>;
   loading?: Type<{}>;
-  loaded?: Type<{ value: any }>;
   error?: Type<{ error: any }>;
 };
 
