@@ -5,6 +5,7 @@ import { Loadable } from 'projects/ngx-loadable/src/lib/loadable.type';
 @Component({
   selector: 'app-custom-loading-template-example',
   templateUrl: './custom-loading-template-example.component.html',
+  styleUrls: ['./custom-loading-template-example.component.css'],
 })
 export class CustomLoadingTemplateExampleComponent {
   loadable: Loadable<object> = idle;

@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ComponentFactoryResolver,
   ComponentRef,
@@ -16,7 +17,7 @@ import {
   hasErrored,
   isLoaded,
 } from '../../loadable.functions';
-import { Loadable } from '../../loadable.type';
+import { Loadable, LoadingState } from '../../loadable.type';
 import { DEFAULT_COMPONENTS } from '../loadable.tokens';
 import { DefaultComponents } from '../module.options';
 
@@ -53,7 +54,7 @@ export type TemplateRefs = {
   templateUrl: './loadable.component.html',
   styleUrls: ['./loadable.component.css'],
 })
-export class LoadableComponent implements OnChanges {
+export class LoadableComponent implements OnChanges, AfterViewInit {
   @Input() loadable: Loadable<unknown> = idle;
   @Input() templates: TemplateRefs = {};
 
@@ -65,22 +66,27 @@ export class LoadableComponent implements OnChanges {
   showNgContent = false;
   templateContext?: object;
 
+  get loadingState(): LoadingState {
+    return getLoadingState(this.loadable);
+  }
+
   constructor(
     private resolver: ComponentFactoryResolver,
     @Inject(DEFAULT_COMPONENTS) private defaultComponents: DefaultComponents
   ) {}
 
-  updateContent(loadable: Loadable<unknown>): void {
-    const defaultComponent = this.defaultComponents[getLoadingState(loadable)];
-    if (defaultComponent && this.content) {
+  updateContent(): void {
+    const defaultComponent = this.defaultComponents[this.loadingState];
+    if (!this.templateRef && defaultComponent && this.content) {
       this.content.clear();
       const factory = this.resolver.resolveComponentFactory(defaultComponent);
       this.defaultComponentRef = this.content.createComponent(factory);
-      setComponentInputs(this.defaultComponentRef, loadable);
+      setComponentInputs(this.defaultComponentRef, this.loadable);
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('ngOnChanges', this.loadable, this.templates);
     if ('loadable' in changes) {
       this.showNgContent = isLoaded(this.loadable);
       this.templateContext = {
@@ -90,13 +96,14 @@ export class LoadableComponent implements OnChanges {
     }
     if ('loadable' in changes || 'templates' in changes) {
       this.defaultComponentRef?.destroy();
-      const loadingState = getLoadingState(this.loadable);
-      if (loadingState !== 'loaded') {
-        this.templateRef = this.templates[loadingState];
-        if (!this.templateRef) {
-          this.updateContent(this.loadable);
-        }
+      if (this.loadingState !== 'loaded') {
+        this.templateRef = this.templates[this.loadingState];
+        this.updateContent();
       }
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.updateContent();
   }
 }
