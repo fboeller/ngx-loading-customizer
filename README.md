@@ -20,6 +20,10 @@ npm install --save ngx-loading-customizer
 
 This repo includes an example application showcasing the usage of ngx-loading-customizer.
 
+It is hosted at https://fboeller.github.io/ngx-loading-customizer.
+
+You can also work with it locally:
+
 ```
 $ git clone https://github.com/fboeller/ngx-loading-customizer.git
 $ cd ngx-loading-customizer
