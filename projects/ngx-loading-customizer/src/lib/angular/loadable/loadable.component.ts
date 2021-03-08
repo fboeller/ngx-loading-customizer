@@ -11,6 +11,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import { fold } from '../../functions/fold.function';
 import { idle } from '../../loadable.constructors';
 import {
   getLoadingState,
@@ -34,13 +35,15 @@ export function setComponentInputs(
 }
 
 function loadableTemplateContext(loadable: Loadable<unknown>): object {
-  if (isLoaded(loadable)) {
-    return { value: loadable.value };
-  } else if (hasErrored(loadable)) {
-    return { error: loadable.error };
-  } else {
-    return {};
-  }
+  return fold(
+    {
+      idle: () => ({}),
+      loading: () => ({}),
+      loaded: (value) => ({ value }),
+      error: (error) => ({ error }),
+    },
+    loadable
+  );
 }
 
 export type TemplateRefs = {
